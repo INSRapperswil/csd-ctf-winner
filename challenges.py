@@ -17,6 +17,11 @@ if not jsonfile.is_file():
     print("The provided file does not exist.")
     exit(1)
 
+# Exclude winners in second arg with comma-separated list
+excluded = []
+if len(sys.argv) > 2 and len(sys.argv[2]) > 0:
+    excluded = sys.argv[2].split(',')
+
 # Assign challenge winners
 users = json.loads(jsonfile.read_text())
 challengeWinnersPerChallenge = {}
@@ -26,7 +31,9 @@ for user in users:
         challengeWinnersPerChallenge.setdefault(challengeTitle, set())
         if challenge['points'] >= challenge['maxPoints']:
             winners = challengeWinnersPerChallenge.get(challengeTitle, set())
-            winners.add(user['username'])
+            username = user['username']
+            if username not in excluded:
+                winners.add(user['username'])
             challengeWinnersPerChallenge.setdefault(challengeTitle, winners)
 
 # Select winner and print results

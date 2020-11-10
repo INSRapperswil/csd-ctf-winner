@@ -7,7 +7,7 @@ This repo contains two tools useful for the Capture The Flag.
 Quickly determine the flag winners. Use it this way:
 
 ```bash
-./challenges.py <path to results file>
+./challenges.py <path to results file> "<comma-separated list with names which can't win (optional)>"
 ```
 
 The results file can be obtained from https://hsr.hacking-lab.com/api/rankings/events/EVENT-ID/users/ and must be in JSON format.
