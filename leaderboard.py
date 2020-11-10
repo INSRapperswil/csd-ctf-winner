@@ -3,7 +3,7 @@ import json
 import sys
 from pathlib import Path
 from operator import itemgetter
-from rich.console import Console
+from rich import print
 from rich.table import Table
 
 if len(sys.argv) < 2:
@@ -19,19 +19,24 @@ if not jsonfile.is_file():
 
 # Order the users by rank
 users = json.loads(jsonfile.read_text())
-sortedUsers = sorted(users, key=itemgetter('rank'))
+sortedUsers = sorted(users, key=itemgetter("rank"))
 
 # Print leaderboard
-winSymbols = [l for l in '🥇🥈🥉🥂🍻']
-table = Table(title="[spring_green1]Leaderboard", show_lines=True)
-table.add_column("[deep_pink3]Rank", justify='right')
-table.add_column("[deep_pink3]Username")
-table.add_column("[deep_pink3]Points", justify='right')
+winSymbols = iter("🥇🥈🥉🥂🍻")
+table = Table(
+    title="Leaderboard",
+    show_lines=True,
+    title_style="spring_green1",
+    header_style="deep_pink3"
+)
+table.add_column("Rank", justify="right")
+table.add_column("Username")
+table.add_column("Points", justify="right")
 for index, user in enumerate(sortedUsers):
-    prefix = ''
-    symbol = winSymbols[index] if index < len(winSymbols) else ''
-    if index < 5:
-        prefix = '[spring_green1]'
     table.add_row(
-        f"{symbol} {prefix}{user['rank']}", f"{prefix}{user['username']}", f"{prefix}{user['points']}")
-Console().print(table)
+        f"{next(winSymbols, '')} {user['rank']}",
+        user["username"],
+        str(user["points"]),
+        style="spring_green1" if index < 5 else None,
+    )
+print(table)
