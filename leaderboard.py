@@ -7,15 +7,13 @@ from rich import print
 from rich.table import Table
 
 if len(sys.argv) < 2:
-    print("Missing file argument.")
-    exit(1)
+    sys.exit("Missing file argument.")
 
 # File from https://hsr.hacking-lab.com/api/rankings/events/EVENT-ID/users/
 jsonfile = Path(sys.argv[1])
 
 if not jsonfile.is_file():
-    print("The provided file does not exist.")
-    exit(1)
+    sys.exit("The provided file does not exist.")
 
 # Order the users by rank
 users = json.loads(jsonfile.read_text())

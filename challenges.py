@@ -7,15 +7,13 @@ from rich import print
 from rich.table import Table
 
 if len(sys.argv) < 2:
-    print("Missing file argument.")
-    exit(1)
+    sys.exit("Missing file argument.")
 
 # File from https://hsr.hacking-lab.com/api/rankings/events/EVENT-ID/users/
 jsonfile = Path(sys.argv[1])
 
 if not jsonfile.is_file():
-    print("The provided file does not exist.")
-    exit(1)
+    sys.exit("The provided file does not exist.")
 
 # Exclude winners in second arg with comma-separated list
 excluded = []
@@ -28,17 +26,15 @@ challengeWinnersPerChallenge = {}
 for user in users:
     for challenge in user["challenges"]:
         challengeTitle = challenge["title"]
-        challengeWinnersPerChallenge.setdefault(challengeTitle, set())
+        winners = challengeWinnersPerChallenge.setdefault(challengeTitle, set())
         if challenge["points"] >= challenge["maxPoints"]:
-            winners = challengeWinnersPerChallenge.get(challengeTitle, set())
             username = user["username"]
             if username not in excluded:
                 winners.add(user["username"])
-            challengeWinnersPerChallenge.setdefault(challengeTitle, winners)
 
 # Select winner and print results
 winSymbols = "🏆🥂🍾🥇🎈🎇🎆🎉✨🎊🏅🍻🚀"
-looseSymbols = "🤔🤨😮🙄😫🤐😵"
+loseSymbols = "🤔🤨😮🙄😫🤐😵"
 table = Table(
     title="Challenge Winners",
     show_lines=True,
@@ -49,9 +45,9 @@ table.add_column("Challenge")
 table.add_column("Winner")
 for challenge in challengeWinnersPerChallenge:
     allChallengeWinners = tuple(challengeWinnersPerChallenge[challenge])
-    if len(allChallengeWinners) > 0:
+    if allChallengeWinners:
         winner = f"{choice(winSymbols)} [spring_green1]{choice(allChallengeWinners)}"
     else:
-        winner = f"{choice(looseSymbols)} Unresolved"
+        winner = f"{choice(loseSymbols)} Unresolved"
     table.add_row(challenge, winner)
 print(table)
