@@ -22,18 +22,19 @@ if len(sys.argv) > 2 and len(sys.argv[2]) > 0:
 
 # Assign challenge winners
 users = json.loads(jsonfile.read_text())
-challengeWinnersPerChallenge = {}
+challengeWinners = {}
 for user in users:
     for challenge in user["challenges"]:
         challengeTitle = challenge["title"]
-        winners = challengeWinnersPerChallenge.setdefault(challengeTitle, set())
+        winners = challengeWinners.setdefault(
+            challengeTitle, set())
         if challenge["points"] >= challenge["maxPoints"]:
             username = user["username"]
             if username not in excluded:
                 winners.add(user["username"])
 
 # Select winner and print results
-winSymbols = "🏆🥂🍾🥇🎈🎇🎆🎉✨🎊🏅🍻🚀"
+winSymbols = "🏆🥂🍾🎈🎇🎆🎉✨🎊🍻🚀"
 loseSymbols = "🤔🤨😮🙄😫🤐😵"
 table = Table(
     title="Challenge Winners",
@@ -43,11 +44,14 @@ table = Table(
 )
 table.add_column("Challenge")
 table.add_column("Winner")
-for challenge in challengeWinnersPerChallenge:
-    allChallengeWinners = tuple(challengeWinnersPerChallenge[challenge])
+for challenge in challengeWinners:
+    allChallengeWinners = tuple(challengeWinners[challenge])
     if allChallengeWinners:
-        winner = f"{choice(winSymbols)} [spring_green1]{choice(allChallengeWinners)}"
+        winner = choice(allChallengeWinners)
+        for otherChallengesTheWinnerWon in [c for c in challengeWinners if winner in challengeWinners[c]]:
+            challengeWinners[otherChallengesTheWinnerWon].remove(winner)
+        winnerText = f"{choice(winSymbols)} [spring_green1]{winner}"
     else:
-        winner = f"{choice(loseSymbols)} Unresolved"
-    table.add_row(challenge, winner)
+        winnerText = f"{choice(loseSymbols)} Unresolved"
+    table.add_row(challenge, winnerText)
 print(table)
