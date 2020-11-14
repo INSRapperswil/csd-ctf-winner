@@ -3,7 +3,6 @@ import sys
 import json
 from random import choice
 from pathlib import Path
-from operator import itemgetter
 from rich import print
 from rich.table import Table
 
