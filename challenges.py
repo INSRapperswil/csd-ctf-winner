@@ -26,8 +26,7 @@ challengeWinners = {}
 for user in users:
     for challenge in user["challenges"]:
         challengeTitle = challenge["title"]
-        winners = challengeWinners.setdefault(
-            challengeTitle, set())
+        winners = challengeWinners.setdefault(challengeTitle, set())
         if challenge["points"] >= challenge["maxPoints"]:
             username = user["username"]
             if username not in excluded:
@@ -48,7 +47,9 @@ for challenge in challengeWinners:
     allChallengeWinners = tuple(challengeWinners[challenge])
     if allChallengeWinners:
         winner = choice(allChallengeWinners)
-        for otherChallengesTheWinnerWon in [c for c in challengeWinners if winner in challengeWinners[c]]:
+        for otherChallengesTheWinnerWon in [
+            c for c in challengeWinners if winner in challengeWinners[c]
+        ]:
             challengeWinners[otherChallengesTheWinnerWon].remove(winner)
         winnerText = f"{choice(winSymbols)} [spring_green1]{winner}"
     else:

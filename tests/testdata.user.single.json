@@ -1,0 +1,20 @@
+[
+    {
+        "rank": 1,
+        "points": 100,
+        "challenges": [
+            {
+                "id": 1,
+                "points": 100,
+                "maxPoints": 100,
+                "lastUserSolutionTime": "2019-10-02T07:20:03Z",
+                "title": "Challenge 1",
+                "level": {
+                    "id": 2,
+                    "name": "easy"
+                }
+            }
+        ],
+        "username": "user1"
+    }
+]

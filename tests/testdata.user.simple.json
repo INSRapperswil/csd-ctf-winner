@@ -1,0 +1,68 @@
+[
+    {
+        "rank": 1,
+        "points": 200,
+        "challenges": [
+            {
+                "id": 1,
+                "points": 100,
+                "maxPoints": 100,
+                "lastUserSolutionTime": "2019-10-02T07:20:03Z",
+                "title": "Challenge 1",
+                "level": {
+                    "id": 2,
+                    "name": "easy"
+                }
+            },
+            {
+                "id": 2,
+                "points": 100,
+                "maxPoints": 100,
+                "lastUserSolutionTime": "2019-09-30T12:16:22Z",
+                "title": "Challenge 2",
+                "level": {
+                    "id": 2,
+                    "name": "easy"
+                }
+            }
+        ],
+        "username": "user1"
+    },
+    {
+        "rank": 2,
+        "points": 298,
+        "challenges": [
+            {
+                "id": 3,
+                "points": 198,
+                "maxPoints": 300,
+                "lastUserSolutionTime": "2019-09-30T19:50:26Z",
+                "title": "Challenge 3",
+                "level": {
+                    "id": 4,
+                    "name": "hard"
+                }
+            },
+            {
+                "id": 1,
+                "points": 100,
+                "maxPoints": 100,
+                "lastUserSolutionTime": "2019-10-02T07:20:03Z",
+                "title": "Challenge 1",
+                "level": {
+                    "id": 2,
+                    "name": "easy"
+                }
+            }
+        ],
+        "username": "user2"
+    },
+    {
+        "rank": 3,
+        "points": 0,
+        "challenges": [
+            {}
+        ],
+        "username": "user3"
+    }
+]
