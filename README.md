@@ -2,11 +2,11 @@
 
 Get the winners for the Cyber Security Days CTF.
 
-## Setup Development
+## Setup Environment
 
 Clone the repository, change into its directory and run the following commands:
 
-1. `python3 -m venv .`
-2. `source bin/activate`
+1. `python3 -m venv .venv`
+2. `source .venv/bin/activate`
 3. `pip install -r requirements.txt`
-4. ``
+4. `python -m ctf`

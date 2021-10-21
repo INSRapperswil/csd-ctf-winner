@@ -1,0 +1,370 @@
+[
+  {
+    "id": 7217,
+    "user": {
+      "id": 10,
+      "username": "whatthehack",
+      "email": "naitsabes@tso.ch",
+      "firstName": "Sebastian",
+      "lastName": "Umar"
+    },
+    "state": "FULL_POINTS",
+    "flagGrade": 1.0,
+    "stepsPenalty": 0.0,
+    "flagPoints": 200,
+    "writeupPoints": 0,
+    "points": 200,
+    "lastEdited": "2021-09-20T09:23:57Z",
+    "challenge": {
+      "id": 1992,
+      "title": "Galactic File Share",
+      "categories": [{ "name": "web_security" }],
+      "level": { "id": 3, "name": "medium" },
+      "maxPoints": 200,
+      "maxFlagPoints": 200,
+      "maxWriteupPoints": 0,
+      "grading": "FLAG",
+      "flagWeight": 1.0,
+      "writeupWeight": 0.0
+    },
+    "eventId": 338
+  },
+  {
+    "id": 7206,
+    "user": {
+      "id": 561,
+      "username": "amo",
+      "email": "amo@ost.ch",
+      "firstName": "Anna",
+      "lastName": "Monster"
+    },
+    "state": "FULL_POINTS",
+    "flagGrade": 1.0,
+    "stepsPenalty": 0.0,
+    "flagPoints": 100,
+    "writeupPoints": 0,
+    "points": 100,
+    "lastEdited": "2021-09-20T09:18:24Z",
+    "challenge": {
+      "id": 1989,
+      "title": "Riddle Earth Flags",
+      "categories": [{ "name": "web_security" }],
+      "level": { "id": 2, "name": "easy" },
+      "maxPoints": 100,
+      "maxFlagPoints": 100,
+      "maxWriteupPoints": 0,
+      "grading": "FLAG",
+      "flagWeight": 1.0,
+      "writeupWeight": 0.0
+    },
+    "eventId": 338
+  },
+  {
+    "id": 7209,
+    "user": {
+      "id": 5,
+      "username": "igoblau",
+      "email": "igorblue@gmail.com",
+      "firstName": "Igor",
+      "lastName": "Blue"
+    },
+    "state": "FULL_POINTS",
+    "flagGrade": 1.0,
+    "stepsPenalty": 0.0,
+    "flagPoints": 100,
+    "writeupPoints": 0,
+    "points": 100,
+    "lastEdited": "2021-09-20T09:19:55Z",
+    "challenge": {
+      "id": 1989,
+      "title": "Riddle Earth Flags",
+      "categories": [{ "name": "web_security" }],
+      "level": { "id": 2, "name": "easy" },
+      "maxPoints": 100,
+      "maxFlagPoints": 100,
+      "maxWriteupPoints": 0,
+      "grading": "FLAG",
+      "flagWeight": 1.0,
+      "writeupWeight": 0.0
+    },
+    "eventId": 338
+  },
+  {
+    "id": 7212,
+    "user": {
+      "id": 541,
+      "username": "zerrrro",
+      "email": "zero@cocacola.com",
+      "firstName": "Coca",
+      "lastName": "Cola"
+    },
+    "state": "FULL_POINTS",
+    "flagGrade": 1.0,
+    "stepsPenalty": 0.0,
+    "flagPoints": 100,
+    "writeupPoints": 0,
+    "points": 100,
+    "lastEdited": "2021-09-20T09:22:27Z",
+    "challenge": {
+      "id": 1989,
+      "title": "Riddle Earth Flags",
+      "categories": [{ "name": "web_security" }],
+      "level": { "id": 2, "name": "easy" },
+      "maxPoints": 100,
+      "maxFlagPoints": 100,
+      "maxWriteupPoints": 0,
+      "grading": "FLAG",
+      "flagWeight": 1.0,
+      "writeupWeight": 0.0
+    },
+    "eventId": 338
+  },
+  {
+    "id": 7213,
+    "user": {
+      "id": 764,
+      "username": "m.willi",
+      "email": "m.willi@gmail.com",
+      "firstName": "M",
+      "lastName": "Willi"
+    },
+    "state": "FULL_POINTS",
+    "flagGrade": 1.0,
+    "stepsPenalty": 0.0,
+    "flagPoints": 100,
+    "writeupPoints": 0,
+    "points": 100,
+    "lastEdited": "2021-09-20T09:23:01Z",
+    "challenge": {
+      "id": 1989,
+      "title": "Riddle Earth Flags",
+      "categories": [{ "name": "web_security" }],
+      "level": { "id": 2, "name": "easy" },
+      "maxPoints": 100,
+      "maxFlagPoints": 100,
+      "maxWriteupPoints": 0,
+      "grading": "FLAG",
+      "flagWeight": 1.0,
+      "writeupWeight": 0.0
+    },
+    "eventId": 338
+  },
+  {
+    "id": 7215,
+    "user": {
+      "id": 764,
+      "username": "m.willi",
+      "email": "m.willi@gmail.com",
+      "firstName": "M",
+      "lastName": "Willi"
+    },
+    "state": "FULL_POINTS",
+    "flagGrade": 1.0,
+    "stepsPenalty": 0.0,
+    "flagPoints": 200,
+    "writeupPoints": 0,
+    "points": 200,
+    "lastEdited": "2021-09-20T09:23:19Z",
+    "challenge": {
+      "id": 1990,
+      "title": "Dating Alice 2",
+      "categories": [{ "name": "web_security" }],
+      "level": { "id": 3, "name": "medium" },
+      "maxPoints": 200,
+      "maxFlagPoints": 200,
+      "maxWriteupPoints": 0,
+      "grading": "FLAG",
+      "flagWeight": 1.0,
+      "writeupWeight": 0.0
+    },
+    "eventId": 338
+  },
+  {
+    "id": 7207,
+    "user": {
+      "id": 561,
+      "username": "amo",
+      "email": "amo@ost.ch",
+      "firstName": "Anna",
+      "lastName": "Monster"
+    },
+    "state": "FULL_POINTS",
+    "flagGrade": 1.0,
+    "stepsPenalty": 0.0,
+    "flagPoints": 100,
+    "writeupPoints": 0,
+    "points": 100,
+    "lastEdited": "2021-09-20T09:18:35Z",
+    "challenge": {
+      "id": 1991,
+      "title": "Emperor Says",
+      "categories": [{ "name": "programming" }],
+      "level": { "id": 2, "name": "easy" },
+      "maxPoints": 100,
+      "maxFlagPoints": 100,
+      "maxWriteupPoints": 0,
+      "grading": "FLAG",
+      "flagWeight": 1.0,
+      "writeupWeight": 0.0
+    },
+    "eventId": 338
+  },
+  {
+    "id": 7214,
+    "user": {
+      "id": 764,
+      "username": "m.willi",
+      "email": "m.willi@gmail.com",
+      "firstName": "M",
+      "lastName": "Willi"
+    },
+    "state": "FULL_POINTS",
+    "flagGrade": 1.0,
+    "stepsPenalty": 0.0,
+    "flagPoints": 100,
+    "writeupPoints": 0,
+    "points": 100,
+    "lastEdited": "2021-09-20T09:23:10Z",
+    "challenge": {
+      "id": 1991,
+      "title": "Emperor Says",
+      "categories": [{ "name": "programming" }],
+      "level": { "id": 2, "name": "easy" },
+      "maxPoints": 100,
+      "maxFlagPoints": 100,
+      "maxWriteupPoints": 0,
+      "grading": "FLAG",
+      "flagWeight": 1.0,
+      "writeupWeight": 0.0
+    },
+    "eventId": 338
+  },
+  {
+    "id": 7210,
+    "user": {
+      "id": 5,
+      "username": "igoblau",
+      "email": "igorblue@gmail.com",
+      "firstName": "Igor",
+      "lastName": "Blue"
+    },
+    "state": "FULL_POINTS",
+    "flagGrade": 1.0,
+    "stepsPenalty": 0.0,
+    "flagPoints": 200,
+    "writeupPoints": 0,
+    "points": 200,
+    "lastEdited": "2021-09-20T09:20:07Z",
+    "challenge": {
+      "id": 1994,
+      "title": "Date Mate",
+      "categories": [
+        { "name": "penetration_testing" },
+        { "name": "linux" },
+        { "name": "reverse_engineering" }
+      ],
+      "level": { "id": 3, "name": "medium" },
+      "maxPoints": 200,
+      "maxFlagPoints": 200,
+      "maxWriteupPoints": 0,
+      "grading": "FLAG",
+      "flagWeight": 1.0,
+      "writeupWeight": 0.0
+    },
+    "eventId": 338
+  },
+  {
+    "id": 7211,
+    "user": {
+      "id": 541,
+      "username": "zerrrro",
+      "email": "zero@cocacola.com",
+      "firstName": "Coca",
+      "lastName": "Cola"
+    },
+    "state": "FULL_POINTS",
+    "flagGrade": 1.0,
+    "stepsPenalty": 0.0,
+    "flagPoints": 200,
+    "writeupPoints": 0,
+    "points": 200,
+    "lastEdited": "2021-09-20T09:22:15Z",
+    "challenge": {
+      "id": 1994,
+      "title": "Date Mate",
+      "categories": [
+        { "name": "penetration_testing" },
+        { "name": "linux" },
+        { "name": "reverse_engineering" }
+      ],
+      "level": { "id": 3, "name": "medium" },
+      "maxPoints": 200,
+      "maxFlagPoints": 200,
+      "maxWriteupPoints": 0,
+      "grading": "FLAG",
+      "flagWeight": 1.0,
+      "writeupWeight": 0.0
+    },
+    "eventId": 338
+  },
+  {
+    "id": 7208,
+    "user": {
+      "id": 561,
+      "username": "amo",
+      "email": "amo@ost.ch",
+      "firstName": "Anna",
+      "lastName": "Monster"
+    },
+    "state": "FULL_POINTS",
+    "flagGrade": 1.0,
+    "stepsPenalty": 0.0,
+    "flagPoints": 200,
+    "writeupPoints": 0,
+    "points": 200,
+    "lastEdited": "2021-09-20T09:18:45Z",
+    "challenge": {
+      "id": 1993,
+      "title": "Dating Alice 1",
+      "categories": [{ "name": "web_security" }],
+      "level": { "id": 3, "name": "medium" },
+      "maxPoints": 200,
+      "maxFlagPoints": 200,
+      "maxWriteupPoints": 0,
+      "grading": "FLAG",
+      "flagWeight": 1.0,
+      "writeupWeight": 0.0
+    },
+    "eventId": 338
+  },
+  {
+    "id": 7216,
+    "user": {
+      "id": 10,
+      "username": "whatthehack",
+      "email": "naitsabes@tso.ch",
+      "firstName": "Sebastian",
+      "lastName": "Umar"
+    },
+    "state": "FULL_POINTS",
+    "flagGrade": 1.0,
+    "stepsPenalty": 0.0,
+    "flagPoints": 200,
+    "writeupPoints": 0,
+    "points": 200,
+    "lastEdited": "2021-09-20T09:23:44Z",
+    "challenge": {
+      "id": 1993,
+      "title": "Dating Alice 1",
+      "categories": [{ "name": "web_security" }],
+      "level": { "id": 3, "name": "medium" },
+      "maxPoints": 200,
+      "maxFlagPoints": 200,
+      "maxWriteupPoints": 0,
+      "grading": "FLAG",
+      "flagWeight": 1.0,
+      "writeupWeight": 0.0
+    },
+    "eventId": 338
+  }
+]

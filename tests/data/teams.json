@@ -1,0 +1,56 @@
+[
+  {
+    "id": 9,
+    "name": "Test-Competers",
+    "description": "",
+    "members": [
+      {
+        "user": {
+          "id": 10,
+          "username": "whatthehack",
+          "userIdentifier": "b034ab1e-d2ed-4ba0-aa60-9a927b787b16"
+        },
+        "leader": false,
+        "teamId": 9
+      },
+      {
+        "user": {
+          "id": 764,
+          "username": "m.willi",
+          "userIdentifier": "f2be81de-4cf9-4607-90d5-1c24c442504a"
+        },
+        "leader": true,
+        "teamId": 9
+      }
+    ],
+    "currentUserIsTeamLeader": false,
+    "archived": false
+  },
+  {
+    "id": 10,
+    "name": "Test-Competers2",
+    "description": "",
+    "members": [
+      {
+        "user": {
+          "id": 17,
+          "username": "watson1@ins.hsr.ch",
+          "userIdentifier": "b034ab1e-d2ed-4ba0-aa60-9a927b787b17"
+        },
+        "leader": false,
+        "teamId": 10
+      },
+      {
+        "user": {
+          "id": 18,
+          "username": "watson2",
+          "userIdentifier": "f2be81de-4cf9-4607-90d5-1c24c442504b"
+        },
+        "leader": true,
+        "teamId": 10
+      }
+    ],
+    "currentUserIsTeamLeader": true,
+    "archived": false
+  }
+]
