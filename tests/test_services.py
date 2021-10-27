@@ -1,3 +1,4 @@
+from ctf.model.User import User
 from tests.mocked_responses import (
     mocked_token,
     mocked_teams,
@@ -38,22 +39,24 @@ def test_get_users(mocked_participants):
     users = get_users(session, event_id=1)
     assert len(users) == 5
     mwilli = users[0]
-    assert mwilli.username == "m.willi"
+    assert mwilli.name == "m.willi"
     assert mwilli.team.id == 9
-    amo = users[1]
-    assert amo.id == 561
-    assert amo.team == None
+    zerrrro = users[3]
+    assert zerrrro.id == 541
+    assert zerrrro.team == None
     whatthehack = users[4]
     assert whatthehack.team.id == 9
 
 
 def test_get_challenges_single(mocked_solutions):
     session = get_authorized_session()
-    challenges = get_challenges(session, event_id=1)
+    users = get_users(session, event_id=1)
+    challenges = get_challenges(session, event_id=1, teams_only=False, users=users)
     assert len(challenges) == 6
     galactic = challenges[0]
     assert galactic.id == 1992
     assert galactic.name == "Galactic File Share"
+    assert 10 in list(map(lambda c: c.id, galactic.candidates))
     assert len(galactic.candidates) == 1
     riddle = challenges[1]
     assert len(riddle.candidates) == 4
@@ -61,12 +64,14 @@ def test_get_challenges_single(mocked_solutions):
 
 def test_get_challenges_teams(mocked_solutions):
     session = get_authorized_session()
-    challenges = get_challenges(session, event_id=1, teams_only=True)
+    users = get_users(session, event_id=1)
+    challenges = get_challenges(session, event_id=1, teams_only=True, users=users)
     assert len(challenges) == 6
     galactic = challenges[0]
     assert galactic.id == 1992
     assert galactic.name == "Galactic File Share"
+    assert 9 in list(map(lambda c: c.id, galactic.candidates))
     assert len(galactic.candidates) == 1
     riddle = challenges[1]
     assert riddle.name == "Riddle Earth Flags"
-    assert len(riddle.candidates) == 1
+    assert len(riddle.candidates) == 2

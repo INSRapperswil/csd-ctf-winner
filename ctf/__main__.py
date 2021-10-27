@@ -2,7 +2,9 @@ import click
 import logging as log
 from rich.logging import RichHandler
 from ctf.service.AuthorizedSession import AuthorizedSession
+from ctf.service.users import get_users
 from ctf.service.challenges import get_challenges
+from ctf.winner import select_winners
 
 
 @click.group(context_settings=dict(auto_envvar_prefix="CTF"))
@@ -90,8 +92,14 @@ def round(context: dict):
     password = context.obj["PASSWORD"]
     evaluate_teams = context.obj["EVALUATE_TEAMS"]
     with AuthorizedSession(tenant, username, password) as session:
-        teams = get_challenges(session, event_id=338, teams_only=evaluate_teams)
-    print(teams)
+        users = get_users(session, event_id=338)
+        challenges = get_challenges(
+            session, event_id=338, teams_only=evaluate_teams, users=users
+        )
+        challenges_with_winners = select_winners(
+            challenges, teams_only=evaluate_teams, users=users
+        )
+    print(challenges_with_winners)
     # raise NotImplementedError()
 
 

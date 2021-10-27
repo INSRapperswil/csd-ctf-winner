@@ -33,18 +33,18 @@
     "members": [
       {
         "user": {
-          "id": 17,
-          "username": "watson1@ins.hsr.ch",
-          "userIdentifier": "b034ab1e-d2ed-4ba0-aa60-9a927b787b17"
+          "id": 561,
+          "username": "amo",
+          "userIdentifier": "92f2ae88-6f40-4059-9e91-f91fc3aabca4"
         },
         "leader": false,
         "teamId": 10
       },
       {
         "user": {
-          "id": 18,
-          "username": "watson2",
-          "userIdentifier": "f2be81de-4cf9-4607-90d5-1c24c442504b"
+          "id": 5,
+          "username": "igoblau",
+          "userIdentifier": "a72e5141-ec39-4b98-8055-bd9c44f99bbf"
         },
         "leader": true,
         "teamId": 10
