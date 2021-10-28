@@ -1,5 +1,6 @@
 import click
 import logging as log
+from pathlib import Path
 from rich.logging import RichHandler
 from ctf.service.AuthorizedSession import AuthorizedSession
 from ctf.service.users import get_users
@@ -108,6 +109,18 @@ def round(context: dict):
 def full(context: dict):
     """Get full event winner."""
     raise NotImplementedError()
+
+
+@cli.command()
+@click.pass_context
+def clear(context: dict):
+    """Clear the previous winners."""
+    file = Path("memory.ctf")
+    if file.exists():
+        file.unlink()
+        log.info("memory deleted")
+    else:
+        log.warning("no memory file found")
 
 
 if __name__ == "__main__":

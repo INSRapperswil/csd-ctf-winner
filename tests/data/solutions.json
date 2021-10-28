@@ -180,36 +180,6 @@
     "eventId": 338
   },
   {
-    "id": 7207,
-    "user": {
-      "id": 561,
-      "username": "amo",
-      "email": "amo@ost.ch",
-      "firstName": "Anna",
-      "lastName": "Monster"
-    },
-    "state": "FULL_POINTS",
-    "flagGrade": 1.0,
-    "stepsPenalty": 0.0,
-    "flagPoints": 100,
-    "writeupPoints": 0,
-    "points": 100,
-    "lastEdited": "2021-09-20T09:18:35Z",
-    "challenge": {
-      "id": 1991,
-      "title": "Emperor Says",
-      "categories": [{ "name": "programming" }],
-      "level": { "id": 2, "name": "easy" },
-      "maxPoints": 100,
-      "maxFlagPoints": 100,
-      "maxWriteupPoints": 0,
-      "grading": "FLAG",
-      "flagWeight": 1.0,
-      "writeupWeight": 0.0
-    },
-    "eventId": 338
-  },
-  {
     "id": 7214,
     "user": {
       "id": 764,

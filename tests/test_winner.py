@@ -46,3 +46,16 @@ def test_select_winner_teams(_get_previous_winners_mock, mocked_solutions):
     riddle = challenges_with_winners[1]
     assert len(riddle.candidates) == 1
     assert riddle.winner.id == 10
+
+
+@mock.patch("ctf.winner._get_previous_winners")
+def test_no_double_winners(_get_previous_winners_mock, mocked_solutions):
+    _get_previous_winners_mock.return_value = _get_previous_winners_testdata()
+    session = get_authorized_session()
+    users = get_users(session, event_id=1)
+    challenges = get_challenges(session, event_id=1, teams_only=False, users=users)
+    challenges_with_winners = select_winners(challenges, teams_only=False, users=users)
+    dating2 = challenges_with_winners[2]
+    emperor = challenges_with_winners[3]
+    assert dating2.winner == users[0]
+    assert emperor.winner == None
