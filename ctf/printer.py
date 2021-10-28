@@ -1,7 +1,12 @@
 from typing import List
 from rich import print
 from rich.table import Table
+from random import choice
 from ctf.model.Challenge import Challenge
+
+
+_win_symbols = "🏆🥂🍾🎈🎇🎆🎉✨🎊🍻🚀"
+_lose_symbols = "🤔🤨😮🙄😫🤐😵"
 
 
 def print_round(challenges_with_winner: List[Challenge]) -> None:
@@ -15,9 +20,9 @@ def print_round(challenges_with_winner: List[Challenge]) -> None:
     table.add_column("Winner")
     for challenge in challenges_with_winner:
         winner = (
-            f"[spring_green1]{challenge.winner.name}"
+            f"{choice(_win_symbols)} [spring_green1]{challenge.winner.name}"
             if challenge.winner
-            else "Unresolved"
+            else f"{choice(_lose_symbols)} Unresolved"
         )
         table.add_row(challenge.name, winner)
     print(table)
