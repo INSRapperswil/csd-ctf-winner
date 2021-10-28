@@ -2,6 +2,7 @@ import click
 import logging as log
 from pathlib import Path
 from rich.logging import RichHandler
+from ctf.printer import print_round
 from ctf.service.AuthorizedSession import AuthorizedSession
 from ctf.service.users import get_users
 from ctf.service.challenges import get_challenges
@@ -100,8 +101,7 @@ def round(context: dict):
         challenges_with_winners = select_winners(
             challenges, teams_only=evaluate_teams, users=users
         )
-    print(challenges_with_winners)
-    # raise NotImplementedError()
+    print_round(challenges_with_winners)
 
 
 @cli.command()
