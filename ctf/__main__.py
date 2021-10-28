@@ -93,10 +93,11 @@ def round(context: dict):
     username = context.obj["USERNAME"]
     password = context.obj["PASSWORD"]
     evaluate_teams = context.obj["EVALUATE_TEAMS"]
+    event_id = context.obj["EVENT_ID"]
     with AuthorizedSession(tenant, username, password) as session:
-        users = get_users(session, event_id=338)
+        users = get_users(session, event_id=event_id)
         challenges = get_challenges(
-            session, event_id=338, teams_only=evaluate_teams, users=users
+            session, event_id=event_id, teams_only=evaluate_teams, users=users
         )
         challenges_with_winners = select_winners(
             challenges, teams_only=evaluate_teams, users=users
