@@ -11,6 +11,30 @@ from ctf.winner import select_winners
 
 @click.group(context_settings=dict(auto_envvar_prefix="CTF"))
 @click.option(
+    "-v",
+    "--verbose",
+    required=False,
+    is_flag=True,
+    help="Enable debug output.",
+)
+@click.pass_context
+def cli(
+    context: dict,
+    verbose: bool,
+):
+    """Get the winners for the Cyber Security Days CTF."""
+    context.ensure_object(dict)
+    context.auto_envvar_prefix = "CTF"
+    log.basicConfig(
+        format="%(message)s",
+        datefmt="[%X]",
+        handlers=[RichHandler()],
+        level=log.DEBUG if verbose else None,
+    )
+
+
+@cli.command()
+@click.option(
     "-t",
     "--tenant",
     required=True,
@@ -52,74 +76,30 @@ from ctf.winner import select_winners
     show_envvar=True,
     help="The Hacking-Lab user password. Refrain from using this parameter in the command, type the password when prompted or pass as an environment variable.",
 )
-@click.option(
-    "-v",
-    "--verbose",
-    required=False,
-    is_flag=True,
-    help="Enable debug output.",
-)
-@click.pass_context
-def cli(
-    context: dict,
-    tenant: str,
-    event: int,
-    teams: bool,
-    username: str,
-    password: str,
-    verbose: bool,
-):
-    """Get the winners for the Cyber Security Days CTF."""
-    context.ensure_object(dict)
-    context.auto_envvar_prefix = "CTF"
-    context.obj["TENANT"] = tenant
-    context.obj["EVENT_ID"] = event
-    context.obj["EVALUATE_TEAMS"] = teams
-    context.obj["USERNAME"] = username
-    context.obj["PASSWORD"] = password
-    log.basicConfig(
-        format="%(message)s",
-        datefmt="[%X]",
-        handlers=[RichHandler()],
-        level=log.DEBUG if verbose else None,
-    )
-
-
-@cli.command()
-@click.pass_context
-def round(context: dict):
+def round(tenant: str, event: int, teams: bool, username: str, password: str):
     """Get round winners."""
-    tenant = context.obj["TENANT"]
-    username = context.obj["USERNAME"]
-    password = context.obj["PASSWORD"]
-    evaluate_teams = context.obj["EVALUATE_TEAMS"]
-    event_id = context.obj["EVENT_ID"]
     with AuthorizedSession(tenant, username, password) as session:
-        users = get_users(session, event_id=event_id)
+        users = get_users(session, event_id=event)
         challenges = get_challenges(
-            session, event_id=event_id, teams_only=evaluate_teams, users=users
+            session, event_id=event, teams_only=teams, users=users
         )
         challenges_with_winners = select_winners(
-            challenges, teams_only=evaluate_teams, users=users
+            challenges, teams_only=teams, users=users
         )
     print_round(challenges_with_winners)
 
 
 @cli.command()
-@click.pass_context
-def full(context: dict):
-    """Get full event winner."""
-    raise NotImplementedError()
-
-
-@cli.command()
-@click.pass_context
-def clear(context: dict):
+def clear():
     """Clear the previous winners."""
     file = Path("memory.ctf")
     if file.exists():
-        file.unlink()
-        log.info("memory deleted")
+        really = click.prompt("Do you really want to clear the results?", type=bool)
+        if really:
+            file.unlink()
+            log.info("memory deleted")
+        else:
+            log.warning("user does not want to delete memory")
     else:
         log.warning("no memory file found")
 
