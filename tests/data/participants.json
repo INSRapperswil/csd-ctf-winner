@@ -6,7 +6,7 @@
       "email": "test@example.com",
       "firstName": "M",
       "lastName": "Willi",
-      "userIdentifier": "f2be81de-4cf9-4607-90d5-1c24c442504a",
+      "userIdentifier": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
       "gender": "UNDEFINED",
       "nationality": "",
       "skills": "",
@@ -22,7 +22,7 @@
       "email": "test@example.com",
       "firstName": "Anna",
       "lastName": "Monster",
-      "userIdentifier": "92f2ae88-6f40-4059-9e91-f91fc3aabca4",
+      "userIdentifier": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
       "gender": "UNDEFINED",
       "nationality": "",
       "skills": "",
@@ -38,14 +38,14 @@
       "email": "test@example.com",
       "firstName": "Igor",
       "lastName": "Blue",
-      "userIdentifier": "a72e5141-ec39-4b98-8055-bd9c44f99bbf",
+      "userIdentifier": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
       "gender": "MALE",
       "nationality": "CH",
       "skills": "Security, CTF, Hacking",
       "organization": "Hacking-Lab",
       "emailDigestDisabled": false
     },
-    "teacherNotes": "Ivan Bütler, User Account for Testing Purposes"
+    "teacherNotes": "User Account for Testing Purposes"
   },
   {
     "profile": {
@@ -54,7 +54,7 @@
       "email": "test@example.com",
       "firstName": "Coca",
       "lastName": "Cola",
-      "userIdentifier": "2e9ee72d-b56d-492d-809a-198eac9b89b5",
+      "userIdentifier": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
       "gender": "UNDEFINED",
       "nationality": "",
       "skills": "",
@@ -70,7 +70,7 @@
       "email": "test@example.com",
       "firstName": "Sebastian",
       "lastName": "Umar",
-      "userIdentifier": "b034ab1e-d2ed-4ba0-aa60-9a927b787b16",
+      "userIdentifier": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
       "gender": "UNDEFINED",
       "nationality": "",
       "skills": "",
