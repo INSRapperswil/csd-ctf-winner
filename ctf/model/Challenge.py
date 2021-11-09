@@ -7,7 +7,7 @@ class Challenge:
     def __init__(self, id: int, name: str) -> None:
         self.id = id
         self.name = name
-        self.candidates: Set[Union[User, Team]] = set([])
+        self.candidates: Set[Union[User, Team]] = set()
         self.winner: Union[None, User, Team] = None
 
     def __repr__(self) -> str:

@@ -9,7 +9,7 @@ def select_winners(
     challenges: List[Challenge], teams_only: bool, users: List[User]
 ) -> List[Challenge]:
     clean_challenges = _remove_previous_winners(challenges, teams_only)
-    round_winners = set([])
+    round_winners = set()
     for challenge in clean_challenges:
         candidates = list(challenge.candidates - round_winners)
         winner = choice(candidates) if candidates else None
