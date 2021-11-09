@@ -4,7 +4,7 @@
     "user": {
       "id": 10,
       "username": "whatthehack",
-      "email": "naitsabes@tso.ch",
+      "email": "test@example.com",
       "firstName": "Sebastian",
       "lastName": "Umar"
     },
@@ -34,7 +34,7 @@
     "user": {
       "id": 561,
       "username": "amo",
-      "email": "amo@ost.ch",
+      "email": "test@example.com",
       "firstName": "Anna",
       "lastName": "Monster"
     },
@@ -64,7 +64,7 @@
     "user": {
       "id": 5,
       "username": "igoblau",
-      "email": "igorblue@gmail.com",
+      "email": "test@example.com",
       "firstName": "Igor",
       "lastName": "Blue"
     },
@@ -124,7 +124,7 @@
     "user": {
       "id": 764,
       "username": "m.willi",
-      "email": "m.willi@gmail.com",
+      "email": "test@example.com",
       "firstName": "M",
       "lastName": "Willi"
     },
@@ -154,7 +154,7 @@
     "user": {
       "id": 764,
       "username": "m.willi",
-      "email": "m.willi@gmail.com",
+      "email": "test@example.com",
       "firstName": "M",
       "lastName": "Willi"
     },
@@ -184,7 +184,7 @@
     "user": {
       "id": 764,
       "username": "m.willi",
-      "email": "m.willi@gmail.com",
+      "email": "test@example.com",
       "firstName": "M",
       "lastName": "Willi"
     },
@@ -214,7 +214,7 @@
     "user": {
       "id": 5,
       "username": "igoblau",
-      "email": "igorblue@gmail.com",
+      "email": "test@example.com",
       "firstName": "Igor",
       "lastName": "Blue"
     },
@@ -282,7 +282,7 @@
     "user": {
       "id": 561,
       "username": "amo",
-      "email": "amo@ost.ch",
+      "email": "test@example.com",
       "firstName": "Anna",
       "lastName": "Monster"
     },
@@ -312,7 +312,7 @@
     "user": {
       "id": 10,
       "username": "whatthehack",
-      "email": "naitsabes@tso.ch",
+      "email": "test@example.com",
       "firstName": "Sebastian",
       "lastName": "Umar"
     },

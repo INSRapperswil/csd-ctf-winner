@@ -3,7 +3,7 @@
     "profile": {
       "id": 764,
       "username": "m.willi",
-      "email": "m.willi@gmail.com",
+      "email": "test@example.com",
       "firstName": "M",
       "lastName": "Willi",
       "userIdentifier": "f2be81de-4cf9-4607-90d5-1c24c442504a",
@@ -19,7 +19,7 @@
     "profile": {
       "id": 561,
       "username": "amo",
-      "email": "amo@ost.ch",
+      "email": "test@example.com",
       "firstName": "Anna",
       "lastName": "Monster",
       "userIdentifier": "92f2ae88-6f40-4059-9e91-f91fc3aabca4",
@@ -35,7 +35,7 @@
     "profile": {
       "id": 5,
       "username": "igoblau",
-      "email": "igorblue@gmail.com",
+      "email": "test@example.com",
       "firstName": "Igor",
       "lastName": "Blue",
       "userIdentifier": "a72e5141-ec39-4b98-8055-bd9c44f99bbf",
@@ -51,7 +51,7 @@
     "profile": {
       "id": 541,
       "username": "zerrrro",
-      "email": "zero@cocacola.com",
+      "email": "test@example.com",
       "firstName": "Coca",
       "lastName": "Cola",
       "userIdentifier": "2e9ee72d-b56d-492d-809a-198eac9b89b5",
@@ -67,7 +67,7 @@
     "profile": {
       "id": 10,
       "username": "whatthehack",
-      "email": "naitsabes@tso.ch",
+      "email": "test@example.com",
       "firstName": "Sebastian",
       "lastName": "Umar",
       "userIdentifier": "b034ab1e-d2ed-4ba0-aa60-9a927b787b16",
