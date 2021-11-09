@@ -5,8 +5,7 @@ from ctf.model import User
 from ctf.service.users import get_users
 from ctf.service.challenges import get_challenges
 from ctf.winner import select_winners
-from tests.mocked_responses import mocked_solutions
-from tests.test_services import get_authorized_session
+from tests.mocks import mocked_solutions, authorized_session
 
 
 def _get_previous_winners_testdata() -> List[User]:
@@ -15,11 +14,14 @@ def _get_previous_winners_testdata() -> List[User]:
 
 
 @mock.patch("ctf.winner._get_previous_winners")
-def test_select_winner_users(_get_previous_winners_mock, mocked_solutions):
+def test_select_winner_users(
+    _get_previous_winners_mock, mocked_solutions, authorized_session
+):
     _get_previous_winners_mock.return_value = _get_previous_winners_testdata()
-    session = get_authorized_session()
-    users = get_users(session, event_id=1)
-    challenges = get_challenges(session, event_id=1, teams_only=False, users=users)
+    users = get_users(authorized_session, event_id=1)
+    challenges = get_challenges(
+        authorized_session, event_id=1, teams_only=False, users=users
+    )
     alice1 = challenges[5]
     alice1_candidates_before = list(map(lambda c: c.id, alice1.candidates))
     assert 10 in alice1_candidates_before
@@ -33,11 +35,14 @@ def test_select_winner_users(_get_previous_winners_mock, mocked_solutions):
 
 
 @mock.patch("ctf.winner._get_previous_winners")
-def test_select_winner_teams(_get_previous_winners_mock, mocked_solutions):
+def test_select_winner_teams(
+    _get_previous_winners_mock, mocked_solutions, authorized_session
+):
     _get_previous_winners_mock.return_value = _get_previous_winners_testdata()
-    session = get_authorized_session()
-    users = get_users(session, event_id=1)
-    challenges = get_challenges(session, event_id=1, teams_only=True, users=users)
+    users = get_users(authorized_session, event_id=1)
+    challenges = get_challenges(
+        authorized_session, event_id=1, teams_only=True, users=users
+    )
     riddle = challenges[1]
     assert len(riddle.candidates) == 2
     challenges_with_winners = select_winners(challenges, teams_only=True, users=users)
@@ -48,11 +53,14 @@ def test_select_winner_teams(_get_previous_winners_mock, mocked_solutions):
 
 
 @mock.patch("ctf.winner._get_previous_winners")
-def test_no_double_winners(_get_previous_winners_mock, mocked_solutions):
+def test_no_double_winners(
+    _get_previous_winners_mock, mocked_solutions, authorized_session
+):
     _get_previous_winners_mock.return_value = _get_previous_winners_testdata()
-    session = get_authorized_session()
-    users = get_users(session, event_id=1)
-    challenges = get_challenges(session, event_id=1, teams_only=False, users=users)
+    users = get_users(authorized_session, event_id=1)
+    challenges = get_challenges(
+        authorized_session, event_id=1, teams_only=False, users=users
+    )
     challenges_with_winners = select_winners(challenges, teams_only=False, users=users)
     dating2 = challenges_with_winners[2]
     emperor = challenges_with_winners[3]

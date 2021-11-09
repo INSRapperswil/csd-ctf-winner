@@ -1,6 +1,7 @@
 import pytest
 import responses
 from pathlib import Path
+from ctf.service.AuthorizedSession import AuthorizedSession
 
 
 def _token():
@@ -75,3 +76,8 @@ def mocked_solutions():
         response.add(**_participants())
         response.add(**_teams())
         yield response
+
+
+@pytest.fixture
+def authorized_session() -> AuthorizedSession:
+    return AuthorizedSession("test", "username", "password")
