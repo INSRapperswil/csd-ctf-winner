@@ -1,4 +1,3 @@
-from ctf.model.User import User
 from tests.mocked_responses import (
     mocked_token,
     mocked_teams,

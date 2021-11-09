@@ -1,8 +1,7 @@
 import logging as log
 from typing import Dict, List
 from functools import partial
-from ctf.model.Team import Team
-from ctf.model.User import User
+from ctf.model import Team, User
 from ctf.service.AuthorizedSession import AuthorizedSession
 
 

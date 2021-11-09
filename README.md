@@ -11,6 +11,10 @@ Clone the repository, change into its directory and run the following commands:
 3. `pip install -r requirements.txt`
 4. `python -m ctf`
 
+### Testing
+
+Just run the command `pytest` in the virtual environment. The test data in `memory.ctf` is a set containing the users `amo` and `whatthehack`.
+
 ## How It Works
 
 ### General Advise

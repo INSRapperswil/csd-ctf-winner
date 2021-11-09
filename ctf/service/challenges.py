@@ -1,7 +1,6 @@
 import logging as log
 from typing import Dict, List
-from ctf.model.User import User
-from ctf.model.Challenge import Challenge
+from ctf.model import User, Challenge
 from ctf.service import AuthorizedSession
 from ctf.service.users import get_users
 

@@ -2,7 +2,7 @@ from typing import List
 from rich import print
 from rich.table import Table
 from random import choice
-from ctf.model.Challenge import Challenge
+from ctf.model import Challenge
 
 
 _win_symbols = "🏆🥂🍾🎈🎇🎆🎉✨🎊🍻🚀"

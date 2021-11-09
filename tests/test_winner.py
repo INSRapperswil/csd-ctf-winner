@@ -1,7 +1,7 @@
 import shelve
 from typing import List
 import unittest.mock as mock
-from ctf.model.User import User
+from ctf.model import User
 from ctf.service.users import get_users
 from ctf.service.challenges import get_challenges
 from ctf.winner import select_winners

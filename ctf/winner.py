@@ -1,9 +1,7 @@
 import shelve
-from typing import List, Any, Set, Union
+from typing import List, Set, Union
 from random import choice
-from ctf.model.Challenge import Challenge
-from ctf.model.User import User
-from ctf.model.Team import Team
+from ctf.model import Challenge, Team, User
 
 
 def select_winners(
