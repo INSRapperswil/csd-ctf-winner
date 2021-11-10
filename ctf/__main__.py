@@ -90,6 +90,35 @@ def round(tenant: str, event: int, teams: bool, username: str, password: str):
 
 
 @cli.command()
+@click.option(
+    "-t",
+    "--tenant",
+    required=True,
+    prompt=True,
+    type=click.STRING,
+    show_envvar=True,
+    help="The Hacking-Lab tenant.",
+)
+@click.option(
+    "-e",
+    "--event",
+    required=True,
+    prompt=True,
+    type=click.INT,
+    help="Event ID of the event to evaluate.",
+)
+@click.option(
+    "--teams",
+    required=False,
+    is_flag=True,
+    help="Evaluate teams instead of single participants.",
+)
+def ranking():
+    """Get ranking and specify format optionally."""
+    raise NotImplementedError()
+
+
+@cli.command()
 def clear():
     """Clear the previous winners."""
     file = Path("memory.ctf")

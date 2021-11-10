@@ -17,7 +17,7 @@ Just run the command `pytest` in the virtual environment. The test data in `memo
 
 ## How It Works
 
-### General Advise
+### General Advice
 
 - If teams are involved in the event, always evaluate teams first (use the `--teams` option).
 - Winners are stored into the `memory.ctf` file so that they cannot win again.
