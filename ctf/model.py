@@ -1,19 +1,14 @@
+from dataclasses import dataclass
 from typing import List, Set, Union
 
 
+@dataclass
 class Base:
-    def __init__(self, id: int, name: str) -> None:
-        self.id = id
-        self.name = name
-
-    def __repr__(self) -> str:
-        return self.name
+    id: int
+    name: str
 
     def __hash__(self) -> int:
         return hash(self.id)
-
-    def __eq__(self, o: object) -> bool:
-        return self.id == o.id if o else False
 
 
 class Team(Base):
