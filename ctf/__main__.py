@@ -83,10 +83,15 @@ def round(tenant: str, event: int, teams: bool, username: str, password: str):
         challenges = get_challenges(
             session, event_id=event, teams_only=teams, users=users
         )
-        challenges_with_winners = select_winners(
-            challenges, teams_only=teams, users=users
-        )
-    print_round(challenges_with_winners)
+        if not users or not challenges:
+            log.error(
+                "Neither participants nor challenges for event found on this tenant. Aborting."
+            )
+        else:
+            challenges_with_winners = select_winners(
+                challenges, teams_only=teams, users=users
+            )
+            print_round(challenges_with_winners)
 
 
 @cli.command()

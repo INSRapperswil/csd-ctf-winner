@@ -1,6 +1,12 @@
 import logging as log
 from typing import Dict, List
 from functools import partial
+from requests.exceptions import (
+    HTTPError,
+    ConnectionError,
+    RequestException,
+    Timeout,
+)
 from ctf.model import Team, User
 from ctf.service.AuthorizedSession import AuthorizedSession
 
@@ -11,9 +17,15 @@ def get_teams(session: AuthorizedSession) -> List[Team]:
         teams_response.raise_for_status()
         teams = list(map(_map_json_to_team, teams_response.json()))
         return teams
-    except Exception as e:
-        log.error(f"get_teams: {str(e)}")
-        return []
+    except HTTPError as e:
+        log.error(f"get_teams: HTTP not ok: {e.response}")
+    except ConnectionError:
+        log.error(f"get_teams: there was a connection error")
+    except Timeout:
+        log.error(f"get_teams: there was a timeout")
+    except RequestException as e:
+        log.error(f"get_teams: {str(e)} ")
+    return []
 
 
 def get_users(session: AuthorizedSession, event_id: int) -> List[User]:
@@ -25,9 +37,15 @@ def get_users(session: AuthorizedSession, event_id: int) -> List[User]:
             map(partial(_map_json_to_user, teams=teams), users_response.json())
         )
         return users
-    except Exception as e:
-        log.error(f"get_users: {str(e)}")
-        return []
+    except HTTPError as e:
+        log.error(f"get_teams: HTTP not ok: {e.response}")
+    except ConnectionError:
+        log.error(f"get_teams: there was a connection error")
+    except Timeout:
+        log.error(f"get_teams: there was a timeout")
+    except RequestException as e:
+        log.error(f"get_teams: {str(e)} ")
+    return []
 
 
 def _map_json_to_team(team_json: Dict) -> Team:

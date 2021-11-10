@@ -1,8 +1,13 @@
 import logging as log
 from typing import Dict, List
+from requests.exceptions import (
+    HTTPError,
+    ConnectionError,
+    RequestException,
+    Timeout,
+)
 from ctf.model import User, Challenge
 from ctf.service import AuthorizedSession
-from ctf.service.users import get_users
 
 
 def get_challenges(
@@ -15,9 +20,15 @@ def get_challenges(
             solutions_response.json(), users, teams_only
         )
         return challenges
-    except Exception as e:
-        log.error(f"get_challenges: {str(e)}")
-        return []
+    except HTTPError as e:
+        log.error(f"get_teams: HTTP not ok: {e.response}")
+    except ConnectionError:
+        log.error(f"get_teams: there was a connection error")
+    except Timeout:
+        log.error(f"get_teams: there was a timeout")
+    except RequestException as e:
+        log.error(f"get_teams: {str(e)} ")
+    return []
 
 
 def _extract_challenges_from_solutions(
