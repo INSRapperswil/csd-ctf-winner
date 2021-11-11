@@ -2,7 +2,7 @@ import pytest
 from tests.mocks import (
     mocked_token,
     mocked_teams,
-    mocked_participants,
+    mocked_users,
     mocked_solutions,
     authorized_session,
 )
@@ -12,18 +12,25 @@ from ctf.service.challenges import get_challenges
 
 # Parameters for teams
 TEST_COMPETERS = Team(id=9, name="Test-Competers", member_ids=[10, 764])
+TEST_COMPETERS.add_points(400 + 400)
 TEST_COMPETERS2 = Team(id=10, name="Test-Competers2", member_ids=[561, 5])
+TEST_COMPETERS2.add_points(300 + 300)
 
 # Parameters for users
 MWILLI = User(id=764, name="m.willi")
 MWILLI.team = TEST_COMPETERS
+MWILLI.add_points(400)
 WHATTHEHACK = User(10, "whatthehack")
 WHATTHEHACK.team = TEST_COMPETERS
+WHATTHEHACK.add_points(400)
 ZERRRRO = User(id=541, name="zerrrro")
+ZERRRRO.add_points(300)
 AMO = User(id=561, name="amo")
 AMO.team = TEST_COMPETERS2
+AMO.add_points(300)
 IGOBLAU = User(id=5, name="igoblau")
 IGOBLAU.team = TEST_COMPETERS2
+IGOBLAU.add_points(300)
 
 # Parameters for challenges with user candidates
 GALACTIC_FILE_SHARE_S = Challenge(1992, "Galactic File Share")
@@ -70,14 +77,14 @@ def test_authorize(mocked_token, authorized_session):
 
 @pytest.mark.parametrize("idx, team", [(0, TEST_COMPETERS), (1, TEST_COMPETERS2)])
 def test_get_teams(mocked_teams, authorized_session, idx, team):
-    teams = get_teams(authorized_session)
+    teams = get_teams(authorized_session, event_id=1)
     assert vars(teams[idx]) == vars(team)
 
 
 @pytest.mark.parametrize(
     "idx, user", [(0, MWILLI), (1, AMO), (2, IGOBLAU), (3, ZERRRRO), (4, WHATTHEHACK)]
 )
-def test_get_users(mocked_participants, authorized_session, idx, user):
+def test_get_users(mocked_users, authorized_session, idx, user):
     users = get_users(authorized_session, event_id=1)
     assert vars(users[idx]) == vars(user)
 

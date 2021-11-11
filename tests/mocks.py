@@ -56,15 +56,18 @@ def mocked_teams():
     with responses.RequestsMock() as response:
         response.add(**_token())
         response.add(**_teams())
+        response.add(**_participants())
+        response.add(**_solutions())
         yield response
 
 
 @pytest.fixture
-def mocked_participants():
+def mocked_users():
     with responses.RequestsMock() as response:
         response.add(**_token())
         response.add(**_teams())
         response.add(**_participants())
+        response.add(**_solutions())
         yield response
 
 

@@ -21,13 +21,13 @@ def get_challenges(
         )
         return challenges
     except HTTPError as e:
-        log.error(f"get_teams: HTTP not ok: {e.response}")
+        log.error(f"get_challenges: HTTP not ok: {e.response}")
     except ConnectionError:
-        log.error(f"get_teams: there was a connection error")
+        log.error(f"get_challenges: there was a connection error")
     except Timeout:
-        log.error(f"get_teams: there was a timeout")
+        log.error(f"get_challenges: there was a timeout")
     except RequestException as e:
-        log.error(f"get_teams: {str(e)} ")
+        log.error(f"get_challenges: {str(e)} ")
     return []
 
 
