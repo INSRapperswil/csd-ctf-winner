@@ -50,7 +50,7 @@ def print_ranking(participants: List[Participant], teams: bool):
     print(table)
 
 
-def html_ranking(participants: List[Participant], teams: bool):
+def html_ranking(participants: List[Participant]):
     table_before = """<table>
     <tbody>"""
     table_after = """

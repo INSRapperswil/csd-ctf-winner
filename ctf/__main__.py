@@ -143,7 +143,7 @@ def ranking(context: dict, tenant: str, events: int, teams: bool, html: bool):
         if not participants:
             log.error("No users found for events. Aborting.")
         elif html:
-            html_ranking(participants, teams)
+            html_ranking(participants)
         else:
             print_ranking(participants, teams)
 
