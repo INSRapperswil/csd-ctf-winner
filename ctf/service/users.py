@@ -22,22 +22,8 @@ def get_teams(session: AuthorizedSession, *event_ids: int) -> List[Team]:
 
 def get_users(session: AuthorizedSession, *event_ids: int) -> List[User]:
     try:
-        collected_user_responses = []
-        for event_id in event_ids:
-            users_response = session.get(f"api/teacher/events/{event_id}/participants/")
-            users_response.raise_for_status()
-            for user_response in users_response.json():
-                user_not_yet_collected = user_response["profile"]["id"] not in map(
-                    lambda r: r["profile"]["id"], collected_user_responses
-                )
-                if user_not_yet_collected:
-                    collected_user_responses.append(user_response)
-        teams_response = session.get("api/user/teams/")
-        teams_response.raise_for_status()
-        teams = list(map(_map_json_to_team, teams_response.json()))
-        users = list(
-            map(partial(_map_json_to_user, teams=teams), collected_user_responses)
-        )
+        teams = _http_get_teams(session)
+        users = _http_get_users(session, teams, *event_ids)
         for event_id in event_ids:
             _add_points_to_participants(session, event_id, users)
         return _sort_participants(users)
@@ -50,6 +36,30 @@ def get_users(session: AuthorizedSession, *event_ids: int) -> List[User]:
     except RequestException as e:
         log.error(f"get_users: {str(e)} ")
     return []
+
+
+def _http_get_users(
+    session: AuthorizedSession, teams: List[Team], *event_ids: int
+) -> List[User]:
+    collected_user_responses = []
+    for event_id in event_ids:
+        users_response = session.get(f"api/teacher/events/{event_id}/participants/")
+        users_response.raise_for_status()
+        for user_response in users_response.json():
+            user_not_yet_collected = user_response["profile"]["id"] not in map(
+                lambda r: r["profile"]["id"], collected_user_responses
+            )
+            if user_not_yet_collected:
+                collected_user_responses.append(user_response)
+    users = list(map(partial(_map_json_to_user, teams=teams), collected_user_responses))
+    return users
+
+
+def _http_get_teams(session: AuthorizedSession) -> List[Team]:
+    teams_response = session.get("api/user/teams/")
+    teams_response.raise_for_status()
+    teams = list(map(_map_json_to_team, teams_response.json()))
+    return teams
 
 
 def _sort_participants(participants: List[Participant]) -> List[Participant]:

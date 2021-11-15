@@ -57,8 +57,8 @@ DATE_MATE_S.candidates.add(ZERRRRO)
 DATING_ALICE_1_S = Challenge(1993, "Dating Alice 1")
 DATING_ALICE_1_S.candidates.add(AMO)
 DATING_ALICE_1_S.candidates.add(WHATTHEHACK)
-RATIONAL_RATIONED_RATIO_S = Challenge(19928, "Rational Rationed Ratio")
-RATIONAL_RATIONED_RATIO_S.candidates.add(HAUS)
+RATIONALLY_RATIONED_RATIO_S = Challenge(19928, "Rationally Rationed Ratio")
+RATIONALLY_RATIONED_RATIO_S.candidates.add(HAUS)
 
 # Parameters for challenges with team candidates
 GALACTIC_FILE_SHARE_T = Challenge(1992, "Galactic File Share")
@@ -141,7 +141,7 @@ def test_get_challenges_single_for_event_1(
 @pytest.mark.parametrize(
     "idx, challenge",
     [
-        (0, RATIONAL_RATIONED_RATIO_S),
+        (0, RATIONALLY_RATIONED_RATIO_S),
     ],
 )
 def test_get_challenges_single_for_event_2(
