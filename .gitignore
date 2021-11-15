@@ -1,8 +1,8 @@
 .vscode
 .DS_Store
 memory.ctf
-*.html
-*.htm
+/*.html
+/*.htm
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

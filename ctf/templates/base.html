@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='favicon_32.png') }}"
+      sizes="32x32"
+    />
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='favicon_192.png') }}"
+      sizes="192x192"
+    />
+    <title>Cyber Security Days CTF Ranking</title>
+  </head>
+
+  <body class="app">
+    <div class="logo">
+      <h1
+        style="background-image: url({{ url_for('static', filename='logo.svg') }});"
+      ></h1>
+    </div>
+    {% block content %}{% endblock %}
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='reload.js') }}"
+    ></script>
+  </body>
+</html>
