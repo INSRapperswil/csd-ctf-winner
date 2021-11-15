@@ -1,4 +1,5 @@
 import pytest
+from datetime import datetime
 from tests.mocks import (
     mocked_token,
     mocked_teams_1,
@@ -12,30 +13,31 @@ from ctf.model import Challenge, Team, User
 from ctf.service.users import get_teams, get_users
 from ctf.service.challenges import get_challenges
 
-
 # Parameters for teams
 TEST_COMPETERS = Team(id=9, name="Test-Competers", member_ids=[10, 764])
-TEST_COMPETERS.add_points(400 + 400)
+TEST_COMPETERS.add_points(400 + 400, "2021-09-20T09:23:57Z")
 TEST_COMPETERS2 = Team(id=10, name="Test-Competers2", member_ids=[561, 5])
-TEST_COMPETERS2.add_points(100 + 200 + 200)  # Riddle Earth Flags only once!
+TEST_COMPETERS2.add_points(
+    100 + 200 + 200, "2021-09-20T09:20:07Z"
+)  # Count Riddle Earth Flags only once
 
 # Parameters for users
 MWILLI = User(id=764, name="m.willi")
 MWILLI.team = TEST_COMPETERS
-MWILLI.add_points(400)
+MWILLI.add_points(400, "2021-09-20T09:23:19Z")
 WHATTHEHACK = User(10, "whatthehack")
 WHATTHEHACK.team = TEST_COMPETERS
-WHATTHEHACK.add_points(400)
-ZERRRRO = User(id=541, name="zerrrro")
-ZERRRRO.add_points(300)
+WHATTHEHACK.add_points(400, "2021-09-20T09:23:57Z")
 AMO = User(id=561, name="amo")
 AMO.team = TEST_COMPETERS2
-AMO.add_points(300)
+AMO.add_points(300, "2021-09-20T09:18:45Z")
 IGOBLAU = User(id=5, name="igoblau")
 IGOBLAU.team = TEST_COMPETERS2
-IGOBLAU.add_points(300)
+IGOBLAU.add_points(300, "2021-09-20T09:20:07Z")
+ZERRRRO = User(id=541, name="zerrrro")
+ZERRRRO.add_points(300, "2021-09-20T09:22:27Z")
 HAUS = User(id=155, name="haus")
-HAUS.add_points(200)
+HAUS.add_points(200, "2021-09-20T10:23:57Z")
 
 # Parameters for challenges with user candidates
 GALACTIC_FILE_SHARE_S = Challenge(1992, "Galactic File Share")
@@ -84,12 +86,12 @@ def test_authorize(mocked_token, authorized_session):
 
 @pytest.mark.parametrize("idx, team", [(0, TEST_COMPETERS), (1, TEST_COMPETERS2)])
 def test_get_teams(mocked_teams_1, authorized_session, idx, team):
-    teams = get_teams(authorized_session, event_id=1)
+    teams = get_teams(authorized_session, 1)
     assert vars(teams[idx]) == vars(team)
 
 
 @pytest.mark.parametrize(
-    "idx, user", [(0, MWILLI), (1, AMO), (2, IGOBLAU), (3, ZERRRRO), (4, WHATTHEHACK)]
+    "idx, user", [(0, MWILLI), (1, WHATTHEHACK), (2, AMO), (3, IGOBLAU), (4, ZERRRRO)]
 )
 def test_get_users(mocked_users_1, authorized_session, idx, user):
     users = get_users(authorized_session, 1)
@@ -98,12 +100,19 @@ def test_get_users(mocked_users_1, authorized_session, idx, user):
 
 @pytest.mark.parametrize(
     "idx, user",
-    [(0, MWILLI), (1, AMO), (2, IGOBLAU), (3, ZERRRRO), (4, WHATTHEHACK), (5, HAUS)],
+    [
+        (0, WHATTHEHACK),
+        (1, MWILLI),
+        (2, AMO),
+        (3, IGOBLAU),
+        (4, ZERRRRO),
+        (5, HAUS),
+    ],
 )
 def test_get_users_for_two_events(mocked_users_2, authorized_session, idx, user):
-    if idx == 4:
+    if idx == 0:
         # because there are two events tested, we can add 100 points from event no 2
-        user.add_points(100)
+        user.add_points(100, "2021-09-20T10:23:57Z")
     users = get_users(authorized_session, 1, 2)
     assert vars(users[idx]) == vars(user)
 

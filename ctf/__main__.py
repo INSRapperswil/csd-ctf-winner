@@ -2,14 +2,34 @@ import click
 import logging as log
 from pathlib import Path
 from rich.logging import RichHandler
-from ctf.printer import print_round
+from ctf.printer import print_round, print_ranking
 from ctf.service.AuthorizedSession import AuthorizedSession
-from ctf.service.users import get_users
+from ctf.service.users import get_teams, get_users
 from ctf.service.challenges import get_challenges
 from ctf.winner import select_winners
 
 
 @click.group(context_settings=dict(auto_envvar_prefix="CTF"))
+@click.option(
+    "-u",
+    "--username",
+    required=True,
+    prompt=True,
+    type=click.STRING,
+    show_envvar=True,
+    allow_from_autoenv=True,
+    help="The Hacking-Lab user with enough privileges to access the API.",
+)
+@click.option(
+    "-p",
+    "--password",
+    required=True,
+    prompt=True,
+    hide_input=True,
+    type=click.STRING,
+    show_envvar=True,
+    help="The Hacking-Lab user password. Refrain from using this parameter in the command, type the password when prompted or pass as an environment variable.",
+)
 @click.option(
     "-v",
     "--verbose",
@@ -20,11 +40,15 @@ from ctf.winner import select_winners
 @click.pass_context
 def cli(
     context: dict,
+    username: str,
+    password: str,
     verbose: bool,
 ):
     """Get the winners for the Cyber Security Days CTF."""
     context.ensure_object(dict)
     context.auto_envvar_prefix = "CTF"
+    context.obj["USERNAME"] = username
+    context.obj["PASSWORD"] = password
     log.basicConfig(
         format="%(message)s",
         datefmt="[%X]",
@@ -55,28 +79,11 @@ def cli(
     is_flag=True,
     help="Evaluate teams instead of single participants.",
 )
-@click.option(
-    "-u",
-    "--username",
-    required=True,
-    prompt=True,
-    type=click.STRING,
-    show_envvar=True,
-    allow_from_autoenv=True,
-    help="The Hacking-Lab user with enough privileges to access the API.",
-)
-@click.option(
-    "-p",
-    "--password",
-    required=True,
-    prompt=True,
-    hide_input=True,
-    type=click.STRING,
-    show_envvar=True,
-    help="The Hacking-Lab user password. Refrain from using this parameter in the command, type the password when prompted or pass as an environment variable.",
-)
-def round(tenant: str, event: int, teams: bool, username: str, password: str):
+@click.pass_context
+def round(context: dict, tenant: str, event: int, teams: bool):
     """Get round winners."""
+    username = context.obj["USERNAME"]
+    password = context.obj["PASSWORD"]
     with AuthorizedSession(tenant, username, password) as session:
         users = get_users(session, event)
         challenges = get_challenges(
@@ -116,9 +123,22 @@ def round(tenant: str, event: int, teams: bool, username: str, password: str):
     is_flag=True,
     help="Evaluate teams instead of single participants.",
 )
-def ranking(tenant: str, events: int, teams: bool):
+@click.pass_context
+def ranking(context: dict, tenant: str, events: int, teams: bool):
     """Get ranking and specify format optionally."""
-    print(events)
+    username = context.obj["USERNAME"]
+    password = context.obj["PASSWORD"]
+    with AuthorizedSession(tenant, username, password) as session:
+        participants = (
+            get_teams(session, *list(events))
+            if teams
+            else get_users(session, *list(events))
+        )
+        if not participants:
+            log.error("No users found for events. Aborting.")
+        else:
+            log.info(participants)
+            print_ranking(participants, teams)
 
 
 @cli.command()

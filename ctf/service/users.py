@@ -11,12 +11,13 @@ from ctf.model import Participant, Team, User
 from ctf.service.AuthorizedSession import AuthorizedSession
 
 
-def get_teams(session: AuthorizedSession, event_id: int) -> List[Team]:
+def get_teams(session: AuthorizedSession, *event_ids: int) -> List[Team]:
     teams = set()
-    users = get_users(session, event_id)
+    users = get_users(session, *event_ids)
     for user in users:
-        teams.add(user.team)
-    return list(teams)
+        if user.team:
+            teams.add(user.team)
+    return _sort_participants(teams)
 
 
 def get_users(session: AuthorizedSession, *event_ids: int) -> List[User]:
@@ -39,7 +40,7 @@ def get_users(session: AuthorizedSession, *event_ids: int) -> List[User]:
         )
         for event_id in event_ids:
             _add_points_to_participants(session, event_id, users)
-        return users
+        return _sort_participants(users)
     except HTTPError as e:
         log.error(f"get_users: HTTP not ok: {e.response}")
     except ConnectionError:
@@ -51,6 +52,14 @@ def get_users(session: AuthorizedSession, *event_ids: int) -> List[User]:
     return []
 
 
+def _sort_participants(participants: List[Participant]) -> List[Participant]:
+    sorted_participants = sorted(
+        participants,
+        key=lambda p: (-p.total_points, p.last_submission.timestamp()),
+    )
+    return list(sorted_participants)
+
+
 def _add_points_to_participants(
     session: AuthorizedSession, event_id: int, users: List[User]
 ) -> List[Participant]:
@@ -59,12 +68,12 @@ def _add_points_to_participants(
     challenge_teams = {}
     for solution in solutions_response.json():
         user = next(u for u in users if u.id == solution["user"]["id"])
-        user.add_points(solution["points"])
+        user.add_points(solution["points"], solution["lastEdited"])
         if user.team:
             challenge_id = solution["challenge"]["id"]
             counted_teams = challenge_teams.get(challenge_id, [])
             if user.team not in counted_teams:
-                user.team.add_points(solution["points"])
+                user.team.add_points(solution["points"], solution["lastEdited"])
                 counted_teams.append(user.team)
                 challenge_teams[challenge_id] = counted_teams
 
