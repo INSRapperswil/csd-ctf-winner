@@ -12,11 +12,12 @@ from ctf.model import Challenge, Team, User
 from ctf.service.users import get_teams, get_users
 from ctf.service.challenges import get_challenges
 
+
 # Parameters for teams
 TEST_COMPETERS = Team(id=9, name="Test-Competers", member_ids=[10, 764])
 TEST_COMPETERS.add_points(400 + 400)
 TEST_COMPETERS2 = Team(id=10, name="Test-Competers2", member_ids=[561, 5])
-TEST_COMPETERS2.add_points(300 + 300)
+TEST_COMPETERS2.add_points(100 + 200 + 200)  # Riddle Earth Flags only once!
 
 # Parameters for users
 MWILLI = User(id=764, name="m.willi")

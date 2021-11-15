@@ -56,11 +56,17 @@ def _add_points_to_participants(
 ) -> List[Participant]:
     solutions_response = session.get(f"api/teacher/events/{event_id}/solutions/")
     solutions_response.raise_for_status()
+    challenge_teams = {}
     for solution in solutions_response.json():
         user = next(u for u in users if u.id == solution["user"]["id"])
         user.add_points(solution["points"])
         if user.team:
-            user.team.add_points(solution["points"])
+            challenge_id = solution["challenge"]["id"]
+            counted_teams = challenge_teams.get(challenge_id, [])
+            if user.team not in counted_teams:
+                user.team.add_points(solution["points"])
+                counted_teams.append(user.team)
+                challenge_teams[challenge_id] = counted_teams
 
 
 def _map_json_to_team(team_json: Dict) -> Team:
