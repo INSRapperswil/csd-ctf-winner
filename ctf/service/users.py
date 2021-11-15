@@ -19,17 +19,26 @@ def get_teams(session: AuthorizedSession, event_id: int) -> List[Team]:
     return list(teams)
 
 
-def get_users(session: AuthorizedSession, event_id: int) -> List[User]:
+def get_users(session: AuthorizedSession, *event_ids: int) -> List[User]:
     try:
-        users_response = session.get(f"api/teacher/events/{event_id}/participants/")
-        users_response.raise_for_status()
+        collected_user_responses = []
+        for event_id in event_ids:
+            users_response = session.get(f"api/teacher/events/{event_id}/participants/")
+            users_response.raise_for_status()
+            for user_response in users_response.json():
+                user_not_yet_collected = user_response["profile"]["id"] not in map(
+                    lambda r: r["profile"]["id"], collected_user_responses
+                )
+                if user_not_yet_collected:
+                    collected_user_responses.append(user_response)
         teams_response = session.get("api/user/teams/")
         teams_response.raise_for_status()
         teams = list(map(_map_json_to_team, teams_response.json()))
         users = list(
-            map(partial(_map_json_to_user, teams=teams), users_response.json())
+            map(partial(_map_json_to_user, teams=teams), collected_user_responses)
         )
-        _add_points_to_participants(session, event_id, users, teams)
+        for event_id in event_ids:
+            _add_points_to_participants(session, event_id, users)
         return users
     except HTTPError as e:
         log.error(f"get_users: HTTP not ok: {e.response}")
@@ -43,13 +52,15 @@ def get_users(session: AuthorizedSession, event_id: int) -> List[User]:
 
 
 def _add_points_to_participants(
-    session: AuthorizedSession, event_id: int, users: List[User], teams: List[Team]
+    session: AuthorizedSession, event_id: int, users: List[User]
 ) -> List[Participant]:
     solutions_response = session.get(f"api/teacher/events/{event_id}/solutions/")
     solutions_response.raise_for_status()
     for solution in solutions_response.json():
-        participant = next(u for u in users if u.id == solution["user"]["id"])
-        participant.add_points(solution["points"])
+        user = next(u for u in users if u.id == solution["user"]["id"])
+        user.add_points(solution["points"])
+        if user.team:
+            user.team.add_points(solution["points"])
 
 
 def _map_json_to_team(team_json: Dict) -> Team:

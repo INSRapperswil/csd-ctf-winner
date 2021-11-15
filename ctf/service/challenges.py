@@ -41,9 +41,9 @@ def _extract_challenges_from_solutions(
             challenge = Challenge(s["challenge"]["id"], s["challenge"]["title"])
             challenges.append(challenge)
         if s["state"] == "FULL_POINTS":
-            user = next(u for u in users if u.id == s["user"]["id"])
-            if not teams_only:
+            user = next((u for u in users if u.id == s["user"]["id"]), None)
+            if user and not teams_only:
                 challenge.candidates.add(user)
-            elif user.team:
+            elif user and user.team:
                 challenge.candidates.add(user.team)
     return challenges

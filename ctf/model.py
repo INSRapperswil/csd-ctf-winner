@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 from typing import List, Set, Union
-from datetime import datetime
 
 
 @dataclass

@@ -38,7 +38,6 @@ def cli(
     "-t",
     "--tenant",
     required=True,
-    prompt=True,
     type=click.STRING,
     show_envvar=True,
     help="The Hacking-Lab tenant.",
@@ -47,7 +46,6 @@ def cli(
     "-e",
     "--event",
     required=True,
-    prompt=True,
     type=click.INT,
     help="Event ID of the event to evaluate.",
 )
@@ -61,6 +59,7 @@ def cli(
     "-u",
     "--username",
     required=True,
+    prompt=True,
     type=click.STRING,
     show_envvar=True,
     allow_from_autoenv=True,
@@ -79,7 +78,7 @@ def cli(
 def round(tenant: str, event: int, teams: bool, username: str, password: str):
     """Get round winners."""
     with AuthorizedSession(tenant, username, password) as session:
-        users = get_users(session, event_id=event)
+        users = get_users(session, event)
         challenges = get_challenges(
             session, event_id=event, teams_only=teams, users=users
         )
@@ -99,18 +98,17 @@ def round(tenant: str, event: int, teams: bool, username: str, password: str):
     "-t",
     "--tenant",
     required=True,
-    prompt=True,
     type=click.STRING,
     show_envvar=True,
     help="The Hacking-Lab tenant.",
 )
 @click.option(
     "-e",
-    "--event",
+    "--events",
     required=True,
-    prompt=True,
     type=click.INT,
-    help="Event ID of the event to evaluate.",
+    help="Event ID(s) of the event(s) to evaluate.",
+    multiple=True,
 )
 @click.option(
     "--teams",
@@ -118,9 +116,9 @@ def round(tenant: str, event: int, teams: bool, username: str, password: str):
     is_flag=True,
     help="Evaluate teams instead of single participants.",
 )
-def ranking():
+def ranking(tenant: str, events: int, teams: bool):
     """Get ranking and specify format optionally."""
-    raise NotImplementedError()
+    print(events)
 
 
 @cli.command()

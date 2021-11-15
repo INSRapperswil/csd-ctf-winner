@@ -18,8 +18,15 @@
     "challenge": {
       "id": 1992,
       "title": "Galactic File Share",
-      "categories": [{ "name": "web_security" }],
-      "level": { "id": 3, "name": "medium" },
+      "categories": [
+        {
+          "name": "web_security"
+        }
+      ],
+      "level": {
+        "id": 3,
+        "name": "medium"
+      },
       "maxPoints": 200,
       "maxFlagPoints": 200,
       "maxWriteupPoints": 0,
@@ -27,7 +34,7 @@
       "flagWeight": 1.0,
       "writeupWeight": 0.0
     },
-    "eventId": 338
+    "eventId": 1
   },
   {
     "id": 7206,
@@ -48,8 +55,15 @@
     "challenge": {
       "id": 1989,
       "title": "Riddle Earth Flags",
-      "categories": [{ "name": "web_security" }],
-      "level": { "id": 2, "name": "easy" },
+      "categories": [
+        {
+          "name": "web_security"
+        }
+      ],
+      "level": {
+        "id": 2,
+        "name": "easy"
+      },
       "maxPoints": 100,
       "maxFlagPoints": 100,
       "maxWriteupPoints": 0,
@@ -57,7 +71,7 @@
       "flagWeight": 1.0,
       "writeupWeight": 0.0
     },
-    "eventId": 338
+    "eventId": 1
   },
   {
     "id": 7209,
@@ -78,8 +92,15 @@
     "challenge": {
       "id": 1989,
       "title": "Riddle Earth Flags",
-      "categories": [{ "name": "web_security" }],
-      "level": { "id": 2, "name": "easy" },
+      "categories": [
+        {
+          "name": "web_security"
+        }
+      ],
+      "level": {
+        "id": 2,
+        "name": "easy"
+      },
       "maxPoints": 100,
       "maxFlagPoints": 100,
       "maxWriteupPoints": 0,
@@ -87,7 +108,7 @@
       "flagWeight": 1.0,
       "writeupWeight": 0.0
     },
-    "eventId": 338
+    "eventId": 1
   },
   {
     "id": 7212,
@@ -108,8 +129,15 @@
     "challenge": {
       "id": 1989,
       "title": "Riddle Earth Flags",
-      "categories": [{ "name": "web_security" }],
-      "level": { "id": 2, "name": "easy" },
+      "categories": [
+        {
+          "name": "web_security"
+        }
+      ],
+      "level": {
+        "id": 2,
+        "name": "easy"
+      },
       "maxPoints": 100,
       "maxFlagPoints": 100,
       "maxWriteupPoints": 0,
@@ -117,7 +145,7 @@
       "flagWeight": 1.0,
       "writeupWeight": 0.0
     },
-    "eventId": 338
+    "eventId": 1
   },
   {
     "id": 7213,
@@ -138,8 +166,15 @@
     "challenge": {
       "id": 1989,
       "title": "Riddle Earth Flags",
-      "categories": [{ "name": "web_security" }],
-      "level": { "id": 2, "name": "easy" },
+      "categories": [
+        {
+          "name": "web_security"
+        }
+      ],
+      "level": {
+        "id": 2,
+        "name": "easy"
+      },
       "maxPoints": 100,
       "maxFlagPoints": 100,
       "maxWriteupPoints": 0,
@@ -147,7 +182,7 @@
       "flagWeight": 1.0,
       "writeupWeight": 0.0
     },
-    "eventId": 338
+    "eventId": 1
   },
   {
     "id": 7215,
@@ -168,8 +203,15 @@
     "challenge": {
       "id": 1990,
       "title": "Dating Alice 2",
-      "categories": [{ "name": "web_security" }],
-      "level": { "id": 3, "name": "medium" },
+      "categories": [
+        {
+          "name": "web_security"
+        }
+      ],
+      "level": {
+        "id": 3,
+        "name": "medium"
+      },
       "maxPoints": 200,
       "maxFlagPoints": 200,
       "maxWriteupPoints": 0,
@@ -177,7 +219,7 @@
       "flagWeight": 1.0,
       "writeupWeight": 0.0
     },
-    "eventId": 338
+    "eventId": 1
   },
   {
     "id": 7214,
@@ -198,8 +240,15 @@
     "challenge": {
       "id": 1991,
       "title": "Emperor Says",
-      "categories": [{ "name": "programming" }],
-      "level": { "id": 2, "name": "easy" },
+      "categories": [
+        {
+          "name": "programming"
+        }
+      ],
+      "level": {
+        "id": 2,
+        "name": "easy"
+      },
       "maxPoints": 100,
       "maxFlagPoints": 100,
       "maxWriteupPoints": 0,
@@ -207,7 +256,7 @@
       "flagWeight": 1.0,
       "writeupWeight": 0.0
     },
-    "eventId": 338
+    "eventId": 1
   },
   {
     "id": 7210,
@@ -229,11 +278,20 @@
       "id": 1994,
       "title": "Date Mate",
       "categories": [
-        { "name": "penetration_testing" },
-        { "name": "linux" },
-        { "name": "reverse_engineering" }
+        {
+          "name": "penetration_testing"
+        },
+        {
+          "name": "linux"
+        },
+        {
+          "name": "reverse_engineering"
+        }
       ],
-      "level": { "id": 3, "name": "medium" },
+      "level": {
+        "id": 3,
+        "name": "medium"
+      },
       "maxPoints": 200,
       "maxFlagPoints": 200,
       "maxWriteupPoints": 0,
@@ -241,7 +299,7 @@
       "flagWeight": 1.0,
       "writeupWeight": 0.0
     },
-    "eventId": 338
+    "eventId": 1
   },
   {
     "id": 7211,
@@ -263,11 +321,20 @@
       "id": 1994,
       "title": "Date Mate",
       "categories": [
-        { "name": "penetration_testing" },
-        { "name": "linux" },
-        { "name": "reverse_engineering" }
+        {
+          "name": "penetration_testing"
+        },
+        {
+          "name": "linux"
+        },
+        {
+          "name": "reverse_engineering"
+        }
       ],
-      "level": { "id": 3, "name": "medium" },
+      "level": {
+        "id": 3,
+        "name": "medium"
+      },
       "maxPoints": 200,
       "maxFlagPoints": 200,
       "maxWriteupPoints": 0,
@@ -275,7 +342,7 @@
       "flagWeight": 1.0,
       "writeupWeight": 0.0
     },
-    "eventId": 338
+    "eventId": 1
   },
   {
     "id": 7208,
@@ -296,8 +363,15 @@
     "challenge": {
       "id": 1993,
       "title": "Dating Alice 1",
-      "categories": [{ "name": "web_security" }],
-      "level": { "id": 3, "name": "medium" },
+      "categories": [
+        {
+          "name": "web_security"
+        }
+      ],
+      "level": {
+        "id": 3,
+        "name": "medium"
+      },
       "maxPoints": 200,
       "maxFlagPoints": 200,
       "maxWriteupPoints": 0,
@@ -305,7 +379,7 @@
       "flagWeight": 1.0,
       "writeupWeight": 0.0
     },
-    "eventId": 338
+    "eventId": 1
   },
   {
     "id": 7216,
@@ -326,8 +400,15 @@
     "challenge": {
       "id": 1993,
       "title": "Dating Alice 1",
-      "categories": [{ "name": "web_security" }],
-      "level": { "id": 3, "name": "medium" },
+      "categories": [
+        {
+          "name": "web_security"
+        }
+      ],
+      "level": {
+        "id": 3,
+        "name": "medium"
+      },
       "maxPoints": 200,
       "maxFlagPoints": 200,
       "maxWriteupPoints": 0,
@@ -335,6 +416,6 @@
       "flagWeight": 1.0,
       "writeupWeight": 0.0
     },
-    "eventId": 338
+    "eventId": 1
   }
 ]

@@ -1,9 +1,11 @@
 import pytest
 from tests.mocks import (
     mocked_token,
-    mocked_teams,
-    mocked_users,
-    mocked_solutions,
+    mocked_teams_1,
+    mocked_users_1,
+    mocked_users_2,
+    mocked_solutions_1,
+    mocked_solutions_2,
     authorized_session,
 )
 from ctf.model import Challenge, Team, User
@@ -31,6 +33,8 @@ AMO.add_points(300)
 IGOBLAU = User(id=5, name="igoblau")
 IGOBLAU.team = TEST_COMPETERS2
 IGOBLAU.add_points(300)
+HAUS = User(id=155, name="haus")
+HAUS.add_points(200)
 
 # Parameters for challenges with user candidates
 GALACTIC_FILE_SHARE_S = Challenge(1992, "Galactic File Share")
@@ -50,6 +54,8 @@ DATE_MATE_S.candidates.add(ZERRRRO)
 DATING_ALICE_1_S = Challenge(1993, "Dating Alice 1")
 DATING_ALICE_1_S.candidates.add(AMO)
 DATING_ALICE_1_S.candidates.add(WHATTHEHACK)
+RATIONAL_RATIONED_RATIO_S = Challenge(19928, "Rational Rationed Ratio")
+RATIONAL_RATIONED_RATIO_S.candidates.add(HAUS)
 
 # Parameters for challenges with team candidates
 GALACTIC_FILE_SHARE_T = Challenge(1992, "Galactic File Share")
@@ -76,7 +82,7 @@ def test_authorize(mocked_token, authorized_session):
 
 
 @pytest.mark.parametrize("idx, team", [(0, TEST_COMPETERS), (1, TEST_COMPETERS2)])
-def test_get_teams(mocked_teams, authorized_session, idx, team):
+def test_get_teams(mocked_teams_1, authorized_session, idx, team):
     teams = get_teams(authorized_session, event_id=1)
     assert vars(teams[idx]) == vars(team)
 
@@ -84,8 +90,20 @@ def test_get_teams(mocked_teams, authorized_session, idx, team):
 @pytest.mark.parametrize(
     "idx, user", [(0, MWILLI), (1, AMO), (2, IGOBLAU), (3, ZERRRRO), (4, WHATTHEHACK)]
 )
-def test_get_users(mocked_users, authorized_session, idx, user):
-    users = get_users(authorized_session, event_id=1)
+def test_get_users(mocked_users_1, authorized_session, idx, user):
+    users = get_users(authorized_session, 1)
+    assert vars(users[idx]) == vars(user)
+
+
+@pytest.mark.parametrize(
+    "idx, user",
+    [(0, MWILLI), (1, AMO), (2, IGOBLAU), (3, ZERRRRO), (4, WHATTHEHACK), (5, HAUS)],
+)
+def test_get_users_for_two_events(mocked_users_2, authorized_session, idx, user):
+    if idx == 4:
+        # because there are two events tested, we can add 100 points from event no 2
+        user.add_points(100)
+    users = get_users(authorized_session, 1, 2)
     assert vars(users[idx]) == vars(user)
 
 
@@ -100,10 +118,28 @@ def test_get_users(mocked_users, authorized_session, idx, user):
         (5, DATING_ALICE_1_S),
     ],
 )
-def test_get_challenges_single(mocked_solutions, authorized_session, idx, challenge):
-    users = get_users(authorized_session, event_id=1)
+def test_get_challenges_single_for_event_1(
+    mocked_solutions_1, authorized_session, idx, challenge
+):
+    users = get_users(authorized_session, 1)
     challenges = get_challenges(
         authorized_session, event_id=1, teams_only=False, users=users
+    )
+    assert vars(challenges[idx]) == vars(challenge)
+
+
+@pytest.mark.parametrize(
+    "idx, challenge",
+    [
+        (0, RATIONAL_RATIONED_RATIO_S),
+    ],
+)
+def test_get_challenges_single_for_event_2(
+    mocked_solutions_2, authorized_session, idx, challenge
+):
+    users = get_users(authorized_session, 1, 2)
+    challenges = get_challenges(
+        authorized_session, event_id=2, teams_only=False, users=users
     )
     assert vars(challenges[idx]) == vars(challenge)
 
@@ -119,8 +155,8 @@ def test_get_challenges_single(mocked_solutions, authorized_session, idx, challe
         (5, DATING_ALICE_1_T),
     ],
 )
-def test_get_challenges_teams(mocked_solutions, authorized_session, idx, challenge):
-    users = get_users(authorized_session, event_id=1)
+def test_get_challenges_teams(mocked_solutions_1, authorized_session, idx, challenge):
+    users = get_users(authorized_session, 1)
     challenges = get_challenges(
         authorized_session, event_id=1, teams_only=True, users=users
     )
