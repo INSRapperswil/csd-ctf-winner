@@ -2,7 +2,7 @@ import click
 import logging as log
 from pathlib import Path
 from rich.logging import RichHandler
-from ctf.printer import print_round, print_ranking
+from ctf.printer import html_ranking, print_round, print_ranking
 from ctf.service.AuthorizedSession import AuthorizedSession
 from ctf.service.users import get_teams, get_users
 from ctf.service.challenges import get_challenges
@@ -123,8 +123,14 @@ def round(context: dict, tenant: str, event: int, teams: bool):
     is_flag=True,
     help="Evaluate teams instead of single participants.",
 )
+@click.option(
+    "--html",
+    required=False,
+    is_flag=True,
+    help="Print an HTML table instead of a nice terminal output.",
+)
 @click.pass_context
-def ranking(context: dict, tenant: str, events: int, teams: bool):
+def ranking(context: dict, tenant: str, events: int, teams: bool, html: bool):
     """Get ranking and specify format optionally."""
     username = context.obj["USERNAME"]
     password = context.obj["PASSWORD"]
@@ -136,8 +142,9 @@ def ranking(context: dict, tenant: str, events: int, teams: bool):
         )
         if not participants:
             log.error("No users found for events. Aborting.")
+        elif html:
+            html_ranking(participants, teams)
         else:
-            log.info(participants)
             print_ranking(participants, teams)
 
 

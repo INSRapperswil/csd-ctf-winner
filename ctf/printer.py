@@ -48,3 +48,21 @@ def print_ranking(participants: List[Participant], teams: bool):
             style="spring_green1" if idx < price_available else None,
         )
     print(table)
+
+
+def html_ranking(participants: List[Participant], teams: bool):
+    table_before = """<table>
+    <tbody>"""
+    table_after = """
+    </tbody>
+</table>
+"""
+    table_content = ""
+    for idx, participant in enumerate(participants):
+        table_content += f"""
+        <tr>
+            <td><b>{idx + 1}</b></td>
+            <td>{participant.name}</td>
+            <td>{participant.total_points}</td>
+        </tr>"""
+    print(table_before + table_content + table_after)
