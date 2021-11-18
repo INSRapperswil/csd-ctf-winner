@@ -30,16 +30,18 @@ h2 {
 h2 {
   padding: 0.5em 1em;
   margin: 1em 0;
+  font-size: 28pt;
 }
 
 ol {
-  margin: 0 1em;
+  margin: 0 1em 0 3em;
 }
 
 li {
   color: white;
   font-size: 14pt;
   white-space: nowrap;
+  font-size: 22pt;
 }
 
 .singleplayer h2 {
