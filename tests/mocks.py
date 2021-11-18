@@ -14,11 +14,21 @@ def _token():
     }
 
 
-def _teams():
+def _teams(event_id: int):
     return {
         "method": responses.GET,
-        "url": "https://test.hacking-lab.com/api/user/teams/",
-        "body": Path("tests/data/teams.json").read_text(),
+        "url": f"https://test.hacking-lab.com/api/events/{event_id}/teams/",
+        "body": Path(f"tests/data/teams_{event_id}.json").read_text(),
+        "status": 200,
+        "content_type": "application/json",
+    }
+
+
+def _members(team_id: int):
+    return {
+        "method": responses.GET,
+        "url": f"https://test.hacking-lab.com/api/teams/{team_id}/members/",
+        "body": Path(f"tests/data/members_{team_id}.json").read_text(),
         "status": 200,
         "content_type": "application/json",
     }
@@ -55,7 +65,9 @@ def mocked_token():
 def mocked_teams_1():
     with responses.RequestsMock() as response:
         response.add(**_token())
-        response.add(**_teams())
+        response.add(**_teams(1))
+        response.add(**_members(9))
+        response.add(**_members(10))
         response.add(**_participants(1))
         response.add(**_solutions(1))
         yield response
@@ -65,7 +77,9 @@ def mocked_teams_1():
 def mocked_users_1():
     with responses.RequestsMock() as response:
         response.add(**_token())
-        response.add(**_teams())
+        response.add(**_teams(1))
+        response.add(**_members(9))
+        response.add(**_members(10))
         response.add(**_participants(1))
         response.add(**_solutions(1))
         yield response
@@ -75,7 +89,10 @@ def mocked_users_1():
 def mocked_users_2():
     with responses.RequestsMock() as response:
         response.add(**_token())
-        response.add(**_teams())
+        response.add(**_teams(1))
+        response.add(**_members(9))
+        response.add(**_members(10))
+        response.add(**_teams(2))
         response.add(**_participants(1))
         response.add(**_solutions(1))
         response.add(**_participants(2))
@@ -88,7 +105,9 @@ def mocked_solutions_1():
     with responses.RequestsMock() as response:
         response.add(**_token())
         response.add(**_participants(1))
-        response.add(**_teams())
+        response.add(**_teams(1))
+        response.add(**_members(9))
+        response.add(**_members(10))
         response.add(**_solutions(1))
         yield response
 
@@ -97,9 +116,12 @@ def mocked_solutions_1():
 def mocked_solutions_2():
     with responses.RequestsMock() as response:
         response.add(**_token())
+        response.add(**_teams(1))
+        response.add(**_members(9))
+        response.add(**_members(10))
+        response.add(**_teams(2))
         response.add(**_participants(1))
         response.add(**_participants(2))
-        response.add(**_teams())
         response.add(**_solutions(1))
         response.add(**_solutions(2))
         response.add(**_solutions(2))

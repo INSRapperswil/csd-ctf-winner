@@ -86,7 +86,7 @@ def round(context: dict, tenant: str, event: int, teams: bool):
     username = context.obj["USERNAME"]
     password = context.obj["PASSWORD"]
     with AuthorizedSession(tenant, username, password) as session:
-        users = get_users(session, event)
+        users = get_users(session, True, event)
         challenges = get_challenges(
             session, event_id=event, teams_only=teams, users=users
         )
@@ -150,9 +150,9 @@ def ranking(
 
     with AuthorizedSession(tenant, username, password) as session:
         participants = (
-            get_teams(session, *list(events))
+            get_teams(session, True, *list(events))
             if teams
-            else get_users(session, *list(events))
+            else get_users(session, True, *list(events))
         )
         if not participants:
             log.error("No users found for events. Aborting.")
@@ -165,16 +165,16 @@ def ranking(
 @cli.command()
 def clear():
     """Clear the previous winners."""
-    file = Path("memory.ctf")
-    if file.exists():
-        really = click.prompt("Do you really want to clear the results?", type=bool)
-        if really:
-            file.unlink()
-            log.info("memory deleted")
-        else:
-            log.warning("user does not want to delete memory")
-    else:
-        log.warning("no memory file found")
+    really = click.prompt("Do you really want to clear the state?", type=bool)
+    if really:
+        memory = Path("memory.ctf")
+        teams = Path("teams.ctf")
+    if memory.exists():
+        memory.unlink()
+        log.info("memory deleted")
+    if teams.exists():
+        teams.unlink()
+        log.info("teams deleted")
 
 
 if __name__ == "__main__":

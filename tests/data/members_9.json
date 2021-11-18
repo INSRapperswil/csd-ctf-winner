@@ -1,0 +1,20 @@
+[
+  {
+    "user": {
+      "id": 10,
+      "username": "whatthehack",
+      "userIdentifier": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    },
+    "leader": false,
+    "teamId": 9
+  },
+  {
+    "user": {
+      "id": 764,
+      "username": "m.willi",
+      "userIdentifier": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    },
+    "leader": true,
+    "teamId": 9
+  }
+]

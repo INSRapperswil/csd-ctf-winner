@@ -1,4 +1,5 @@
 import logging as log
+import json
 from typing import Dict, List
 from functools import partial
 from requests.exceptions import (
@@ -7,22 +8,29 @@ from requests.exceptions import (
     RequestException,
     Timeout,
 )
+from pathlib import Path
+from os.path import getmtime
+from datetime import datetime
 from ctf.model import Participant, Team, User
 from ctf.service.AuthorizedSession import AuthorizedSession
 
 
-def get_teams(session: AuthorizedSession, *event_ids: int) -> List[Team]:
+def get_teams(
+    session: AuthorizedSession, force_renew: bool, *event_ids: int
+) -> List[Team]:
     teams = set()
-    users = get_users(session, *event_ids)
+    users = get_users(session, force_renew, *event_ids)
     for user in users:
         if user.team:
             teams.add(user.team)
     return _sort_participants(teams)
 
 
-def get_users(session: AuthorizedSession, *event_ids: int) -> List[User]:
+def get_users(
+    session: AuthorizedSession, force_renew: bool, *event_ids: int
+) -> List[User]:
     try:
-        teams = _http_get_teams(session)
+        teams = _http_get_teams(session, force_renew, *event_ids)
         users = _http_get_users(session, teams, *event_ids)
         for event_id in event_ids:
             _add_points_to_participants(session, event_id, users)
@@ -55,10 +63,36 @@ def _http_get_users(
     return users
 
 
-def _http_get_teams(session: AuthorizedSession) -> List[Team]:
-    teams_response = session.get("api/user/teams/")
-    teams_response.raise_for_status()
-    teams = list(map(_map_json_to_team, teams_response.json()))
+def _http_get_teams(
+    session: AuthorizedSession, force_renew: bool, *event_ids: int
+) -> List[Team]:
+    teams_file = Path("teams.ctf")
+    teams_file_valid = teams_file.exists()
+    log.info
+    if teams_file_valid:
+        modification_time = getmtime(teams_file)
+        now = datetime.now().timestamp()
+        teams_file_valid = not (now - modification_time > (5 * 60))
+    if teams_file_valid and not force_renew:
+        log.info("read teams from file")
+        teams_json = teams_file.read_text()
+    else:
+        log.info("download teams from server")
+        teams = []
+        for event_id in event_ids:
+            teams_response = session.get(f"api/events/{event_id}/teams/")
+            teams_response.raise_for_status()
+            for teams_for_event in teams_response.json():
+                team_id = teams_for_event["team"]["id"]
+                if team_id in list(map(lambda t: t["id"], teams)):
+                    continue
+                members_response = session.get(f"api/teams/{team_id}/members/")
+                members_response.raise_for_status()
+                teams_for_event["team"].setdefault("members", members_response.json())
+                teams.append(teams_for_event["team"])
+        teams_json = json.dumps(teams)
+        teams_file.write_text(teams_json)
+    teams = list(map(_map_json_to_team, json.loads(teams_json)))
     return teams
 
 

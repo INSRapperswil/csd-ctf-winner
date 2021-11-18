@@ -18,7 +18,7 @@ def test_select_winner_users(
     _get_previous_winners_mock, mocked_solutions_1, authorized_session
 ):
     _get_previous_winners_mock.return_value = _get_previous_winners_testdata()
-    users = get_users(authorized_session, 1)
+    users = get_users(authorized_session, True, 1)
     challenges = get_challenges(
         authorized_session, event_id=1, teams_only=False, users=users
     )
@@ -37,7 +37,7 @@ def test_select_winner_teams(
     _get_previous_winners_mock, mocked_solutions_1, authorized_session
 ):
     _get_previous_winners_mock.return_value = _get_previous_winners_testdata()
-    users = get_users(authorized_session, 1)
+    users = get_users(authorized_session, True, 1)
     challenges = get_challenges(
         authorized_session, event_id=1, teams_only=True, users=users
     )
@@ -52,7 +52,7 @@ def test_no_double_winners(
     _get_previous_winners_mock, mocked_solutions_1, authorized_session
 ):
     _get_previous_winners_mock.return_value = _get_previous_winners_testdata()
-    users = get_users(authorized_session, 1)
+    users = get_users(authorized_session, True, 1)
     challenges = get_challenges(
         authorized_session, event_id=1, teams_only=False, users=users
     )

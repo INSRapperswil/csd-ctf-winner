@@ -15,8 +15,8 @@ h2 {
 
 .logo {
   display: flex;
-  justify-content: flex-end;
-  margin: 0 1em;
+  justify-content: center;
+  margin: 1em;
 }
 
 .logo h1 {
@@ -29,19 +29,38 @@ h2 {
 
 h2 {
   padding: 0.5em 1em;
-  margin: 1em 0;
   font-size: 28pt;
+  margin-bottom: 0.5em;
 }
 
 ol {
-  margin: 0 1em 0 3em;
+  margin: 0 1em 0.5em 3em;
 }
 
 li {
   color: white;
   font-size: 14pt;
-  white-space: nowrap;
   font-size: 22pt;
+}
+
+.player {
+  display: flex;
+  justify-content: space-between;
+}
+
+.name {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.points {
+  font-weight: 400;
+}
+
+.singleplayer,
+.multiplayer {
+  margin: 1.5em 0;
 }
 
 .singleplayer h2 {

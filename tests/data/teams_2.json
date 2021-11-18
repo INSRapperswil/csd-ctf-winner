@@ -1,0 +1,22 @@
+[
+  {
+    "team": {
+      "id": 9,
+      "name": "Test-Competers",
+      "description": "",
+      "archived": false
+    },
+    "mandatory": false,
+    "eventId": 2
+  },
+  {
+    "team": {
+      "id": 10,
+      "name": "Test-Competers2",
+      "description": "",
+      "archived": false
+    },
+    "mandatory": false,
+    "eventId": 2
+  }
+]
