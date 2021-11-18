@@ -86,7 +86,7 @@ def round(context: dict, tenant: str, event: int, teams: bool):
     username = context.obj["USERNAME"]
     password = context.obj["PASSWORD"]
     with AuthorizedSession(tenant, username, password) as session:
-        users = get_users(session, False, event)
+        users = get_users(session, True, event)
         challenges = get_challenges(
             session, event_id=event, teams_only=teams, users=users
         )
@@ -150,9 +150,9 @@ def ranking(
 
     with AuthorizedSession(tenant, username, password) as session:
         participants = (
-            get_teams(session, False, *list(events))
+            get_teams(session, True, *list(events))
             if teams
-            else get_users(session, False, *list(events))
+            else get_users(session, True, *list(events))
         )
         if not participants:
             log.error("No users found for events. Aborting.")

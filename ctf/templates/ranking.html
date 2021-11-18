@@ -3,7 +3,12 @@
   <h2>Single Player</h2>
   <ol>
     {% for player in singleplayers %}
-    <li>{{ player.name }}</li>
+    <li>
+      <div class="player">
+        <span class="name">{{ player.name }}</span
+        ><span class="points">{{ player.total_points }}</span>
+      </div>
+    </li>
     {% endfor %}
   </ol>
 </div>
@@ -11,7 +16,12 @@
   <h2>Multiplayer</h2>
   <ol>
     {% for player in multiplayers %}
-    <li>{{ player.name }}</li>
+    <li>
+      <div class="player">
+        <span class="name">{{ player.name }}</span
+        ><span class="points">{{ player.total_points }}</span>
+      </div>
+    </li>
     {% endfor %}
   </ol>
 </div>

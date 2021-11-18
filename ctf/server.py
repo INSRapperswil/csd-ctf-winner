@@ -23,5 +23,5 @@ def _ranking():
     users = get_users(_session, False, *_event_ids)
     teams = get_teams(_session, False, *_event_ids)
     return render_template(
-        "ranking.html", singleplayers=users[:9], multiplayers=teams[:8]
+        "ranking.html", singleplayers=users[:7], multiplayers=teams[:7]
     )
