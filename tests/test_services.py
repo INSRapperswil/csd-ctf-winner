@@ -86,7 +86,7 @@ def test_authorize(mocked_token, authorized_session):
 
 @pytest.mark.parametrize("idx, team", [(0, TEST_COMPETERS), (1, TEST_COMPETERS2)])
 def test_get_teams(mocked_teams_1, authorized_session, idx, team):
-    teams = get_teams(authorized_session, 1)
+    teams = get_teams(authorized_session, True, 1)
     assert vars(teams[idx]) == vars(team)
 
 
@@ -94,7 +94,7 @@ def test_get_teams(mocked_teams_1, authorized_session, idx, team):
     "idx, user", [(0, MWILLI), (1, WHATTHEHACK), (2, AMO), (3, IGOBLAU), (4, ZERRRRO)]
 )
 def test_get_users(mocked_users_1, authorized_session, idx, user):
-    users = get_users(authorized_session, 1)
+    users = get_users(authorized_session, True, 1)
     assert vars(users[idx]) == vars(user)
 
 
@@ -113,7 +113,7 @@ def test_get_users_for_two_events(mocked_users_2, authorized_session, idx, user)
     if idx == 0:
         # because there are two events tested, we can add 100 points from event no 2
         user.add_points(100, "2021-09-20T10:23:57Z")
-    users = get_users(authorized_session, 1, 2)
+    users = get_users(authorized_session, True, 1, 2)
     assert vars(users[idx]) == vars(user)
 
 
@@ -131,7 +131,7 @@ def test_get_users_for_two_events(mocked_users_2, authorized_session, idx, user)
 def test_get_challenges_single_for_event_1(
     mocked_solutions_1, authorized_session, idx, challenge
 ):
-    users = get_users(authorized_session, 1)
+    users = get_users(authorized_session, True, 1)
     challenges = get_challenges(
         authorized_session, event_id=1, teams_only=False, users=users
     )
@@ -147,7 +147,7 @@ def test_get_challenges_single_for_event_1(
 def test_get_challenges_single_for_event_2(
     mocked_solutions_2, authorized_session, idx, challenge
 ):
-    users = get_users(authorized_session, 1, 2)
+    users = get_users(authorized_session, True, 1, 2)
     challenges = get_challenges(
         authorized_session, event_id=2, teams_only=False, users=users
     )
@@ -166,7 +166,7 @@ def test_get_challenges_single_for_event_2(
     ],
 )
 def test_get_challenges_teams(mocked_solutions_1, authorized_session, idx, challenge):
-    users = get_users(authorized_session, 1)
+    users = get_users(authorized_session, True, 1)
     challenges = get_challenges(
         authorized_session, event_id=1, teams_only=True, users=users
     )

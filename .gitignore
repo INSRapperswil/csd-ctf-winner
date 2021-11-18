@@ -1,6 +1,8 @@
 .vscode
 .DS_Store
 memory.ctf
+teams.ctf
+teams.ctf.json
 /*.html
 /*.htm
 
