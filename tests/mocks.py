@@ -24,21 +24,21 @@ def _teams():
     }
 
 
-def _participants():
+def _participants(event_id: int):
     return {
         "method": responses.GET,
-        "url": "https://test.hacking-lab.com/api/teacher/events/1/participants/",
-        "body": Path("tests/data/participants.json").read_text(),
+        "url": f"https://test.hacking-lab.com/api/teacher/events/{event_id}/participants/",
+        "body": Path(f"tests/data/participants_{event_id}.json").read_text(),
         "status": 200,
         "content_type": "application/json",
     }
 
 
-def _solutions():
+def _solutions(event_id: int):
     return {
         "method": responses.GET,
-        "url": "https://test.hacking-lab.com/api/teacher/events/1/solutions/",
-        "body": Path("tests/data/solutions.json").read_text(),
+        "url": f"https://test.hacking-lab.com/api/teacher/events/{event_id}/solutions/",
+        "body": Path(f"tests/data/solutions_{event_id}.json").read_text(),
         "status": 200,
         "content_type": "application/json",
     }
@@ -52,29 +52,57 @@ def mocked_token():
 
 
 @pytest.fixture
-def mocked_teams():
+def mocked_teams_1():
     with responses.RequestsMock() as response:
         response.add(**_token())
         response.add(**_teams())
+        response.add(**_participants(1))
+        response.add(**_solutions(1))
         yield response
 
 
 @pytest.fixture
-def mocked_participants():
+def mocked_users_1():
     with responses.RequestsMock() as response:
         response.add(**_token())
         response.add(**_teams())
-        response.add(**_participants())
+        response.add(**_participants(1))
+        response.add(**_solutions(1))
         yield response
 
 
 @pytest.fixture
-def mocked_solutions():
+def mocked_users_2():
     with responses.RequestsMock() as response:
         response.add(**_token())
-        response.add(**_solutions())
-        response.add(**_participants())
         response.add(**_teams())
+        response.add(**_participants(1))
+        response.add(**_solutions(1))
+        response.add(**_participants(2))
+        response.add(**_solutions(2))
+        yield response
+
+
+@pytest.fixture
+def mocked_solutions_1():
+    with responses.RequestsMock() as response:
+        response.add(**_token())
+        response.add(**_participants(1))
+        response.add(**_teams())
+        response.add(**_solutions(1))
+        yield response
+
+
+@pytest.fixture
+def mocked_solutions_2():
+    with responses.RequestsMock() as response:
+        response.add(**_token())
+        response.add(**_participants(1))
+        response.add(**_participants(2))
+        response.add(**_teams())
+        response.add(**_solutions(1))
+        response.add(**_solutions(2))
+        response.add(**_solutions(2))
         yield response
 
 

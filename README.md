@@ -22,7 +22,7 @@ Just run the command `pytest` in the virtual environment. The test data in `memo
 - If teams are involved in the event, always evaluate teams first (use the `--teams` option).
 - Winners are stored into the `memory.ctf` file so that they cannot win again.
 
-### Algorithm
+### Algorithm Round
 
 1. Fetch all participants and organize them into teams, if they are team members.
 2. Get solutions, and out of it, the challenges.
@@ -31,3 +31,10 @@ Just run the command `pytest` in the virtual environment. The test data in `memo
 5. Select winner for challenge.
 6. Add winners to `memory.ctf` file.
 7. Print challenges and their winners.
+
+### Algorithm Ranking
+
+1. After getting the users and the teams, fetch the solutions and add points to the user/team.
+2. Also add the overall last submission date to the participant.
+3. Sort participants by points (descending) and last submission date (ascending).
+4. Print users/teams, their points and their rank. The rank is defined by the list index.

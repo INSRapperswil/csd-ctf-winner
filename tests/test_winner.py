@@ -5,7 +5,7 @@ from ctf.model import User
 from ctf.service.users import get_users
 from ctf.service.challenges import get_challenges
 from ctf.winner import select_winners
-from tests.mocks import mocked_solutions, authorized_session
+from tests.mocks import mocked_solutions_1, authorized_session
 
 
 def _get_previous_winners_testdata() -> List[User]:
@@ -15,10 +15,10 @@ def _get_previous_winners_testdata() -> List[User]:
 
 @mock.patch("ctf.winner._get_previous_winners")
 def test_select_winner_users(
-    _get_previous_winners_mock, mocked_solutions, authorized_session
+    _get_previous_winners_mock, mocked_solutions_1, authorized_session
 ):
     _get_previous_winners_mock.return_value = _get_previous_winners_testdata()
-    users = get_users(authorized_session, event_id=1)
+    users = get_users(authorized_session, 1)
     challenges = get_challenges(
         authorized_session, event_id=1, teams_only=False, users=users
     )
@@ -34,10 +34,10 @@ def test_select_winner_users(
 
 @mock.patch("ctf.winner._get_previous_winners")
 def test_select_winner_teams(
-    _get_previous_winners_mock, mocked_solutions, authorized_session
+    _get_previous_winners_mock, mocked_solutions_1, authorized_session
 ):
     _get_previous_winners_mock.return_value = _get_previous_winners_testdata()
-    users = get_users(authorized_session, event_id=1)
+    users = get_users(authorized_session, 1)
     challenges = get_challenges(
         authorized_session, event_id=1, teams_only=True, users=users
     )
@@ -49,10 +49,10 @@ def test_select_winner_teams(
 
 @mock.patch("ctf.winner._get_previous_winners")
 def test_no_double_winners(
-    _get_previous_winners_mock, mocked_solutions, authorized_session
+    _get_previous_winners_mock, mocked_solutions_1, authorized_session
 ):
     _get_previous_winners_mock.return_value = _get_previous_winners_testdata()
-    users = get_users(authorized_session, event_id=1)
+    users = get_users(authorized_session, 1)
     challenges = get_challenges(
         authorized_session, event_id=1, teams_only=False, users=users
     )

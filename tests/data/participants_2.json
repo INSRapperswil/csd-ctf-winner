@@ -1,0 +1,18 @@
+[
+  {
+    "profile": {
+      "id": 155,
+      "username": "haus",
+      "email": "test@example.com",
+      "firstName": "H",
+      "lastName": "Aus",
+      "userIdentifier": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "gender": "UNDEFINED",
+      "nationality": "",
+      "skills": "",
+      "organization": "",
+      "emailDigestDisabled": false
+    },
+    "teacherNotes": ""
+  }
+]

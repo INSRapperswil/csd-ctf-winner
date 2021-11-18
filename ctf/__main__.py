@@ -2,65 +2,19 @@ import click
 import logging as log
 from pathlib import Path
 from rich.logging import RichHandler
-from ctf.printer import print_round
+from ctf.printer import html_ranking, print_round, print_ranking
 from ctf.service.AuthorizedSession import AuthorizedSession
-from ctf.service.users import get_users
+from ctf.service.users import get_teams, get_users
 from ctf.service.challenges import get_challenges
 from ctf.winner import select_winners
 
 
 @click.group(context_settings=dict(auto_envvar_prefix="CTF"))
 @click.option(
-    "-v",
-    "--verbose",
-    required=False,
-    is_flag=True,
-    help="Enable debug output.",
-)
-@click.pass_context
-def cli(
-    context: dict,
-    verbose: bool,
-):
-    """Get the winners for the Cyber Security Days CTF."""
-    context.ensure_object(dict)
-    context.auto_envvar_prefix = "CTF"
-    log.basicConfig(
-        format="%(message)s",
-        datefmt="[%X]",
-        handlers=[RichHandler()],
-        level=log.DEBUG if verbose else None,
-    )
-
-
-@cli.command()
-@click.option(
-    "-t",
-    "--tenant",
-    required=True,
-    prompt=True,
-    type=click.STRING,
-    show_envvar=True,
-    help="The Hacking-Lab tenant.",
-)
-@click.option(
-    "-e",
-    "--event",
-    required=True,
-    prompt=True,
-    type=click.INT,
-    help="Event ID of the event to evaluate.",
-)
-@click.option(
-    "--teams",
-    required=False,
-    is_flag=True,
-    help="Evaluate teams instead of single participants.",
-)
-@click.option(
     "-u",
     "--username",
     required=True,
+    prompt=True,
     type=click.STRING,
     show_envvar=True,
     allow_from_autoenv=True,
@@ -76,10 +30,62 @@ def cli(
     show_envvar=True,
     help="The Hacking-Lab user password. Refrain from using this parameter in the command, type the password when prompted or pass as an environment variable.",
 )
-def round(tenant: str, event: int, teams: bool, username: str, password: str):
+@click.option(
+    "-v",
+    "--verbose",
+    required=False,
+    is_flag=True,
+    help="Enable debug output.",
+)
+@click.pass_context
+def cli(
+    context: dict,
+    username: str,
+    password: str,
+    verbose: bool,
+):
+    """Get the winners for the Cyber Security Days CTF."""
+    context.ensure_object(dict)
+    context.auto_envvar_prefix = "CTF"
+    context.obj["USERNAME"] = username
+    context.obj["PASSWORD"] = password
+    log.basicConfig(
+        format="%(message)s",
+        datefmt="[%X]",
+        handlers=[RichHandler()],
+        level=log.DEBUG if verbose else None,
+    )
+
+
+@cli.command()
+@click.option(
+    "-t",
+    "--tenant",
+    required=True,
+    type=click.STRING,
+    show_envvar=True,
+    help="The Hacking-Lab tenant.",
+)
+@click.option(
+    "-e",
+    "--event",
+    required=True,
+    type=click.INT,
+    help="Event ID of the event to evaluate.",
+)
+@click.option(
+    "--teams",
+    required=False,
+    is_flag=True,
+    help="Evaluate teams instead of single participants.",
+)
+@click.pass_context
+def round(context: dict, tenant: str, event: int, teams: bool):
     """Get round winners."""
+    username = context.obj["USERNAME"]
+    password = context.obj["PASSWORD"]
     with AuthorizedSession(tenant, username, password) as session:
-        users = get_users(session, event_id=event)
+        users = get_users(session, event)
         challenges = get_challenges(
             session, event_id=event, teams_only=teams, users=users
         )
@@ -99,18 +105,17 @@ def round(tenant: str, event: int, teams: bool, username: str, password: str):
     "-t",
     "--tenant",
     required=True,
-    prompt=True,
     type=click.STRING,
     show_envvar=True,
     help="The Hacking-Lab tenant.",
 )
 @click.option(
     "-e",
-    "--event",
+    "--events",
     required=True,
-    prompt=True,
     type=click.INT,
-    help="Event ID of the event to evaluate.",
+    help="Event ID(s) of the event(s) to evaluate.",
+    multiple=True,
 )
 @click.option(
     "--teams",
@@ -118,9 +123,29 @@ def round(tenant: str, event: int, teams: bool, username: str, password: str):
     is_flag=True,
     help="Evaluate teams instead of single participants.",
 )
-def ranking():
+@click.option(
+    "--html",
+    required=False,
+    is_flag=True,
+    help="Print an HTML table instead of a nice terminal output.",
+)
+@click.pass_context
+def ranking(context: dict, tenant: str, events: int, teams: bool, html: bool):
     """Get ranking and specify format optionally."""
-    raise NotImplementedError()
+    username = context.obj["USERNAME"]
+    password = context.obj["PASSWORD"]
+    with AuthorizedSession(tenant, username, password) as session:
+        participants = (
+            get_teams(session, *list(events))
+            if teams
+            else get_users(session, *list(events))
+        )
+        if not participants:
+            log.error("No users found for events. Aborting.")
+        elif html:
+            html_ranking(participants)
+        else:
+            print_ranking(participants, teams)
 
 
 @cli.command()

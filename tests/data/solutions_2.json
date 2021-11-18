@@ -1,0 +1,76 @@
+[
+  {
+    "id": 72178,
+    "user": {
+      "id": 10,
+      "username": "whatthehack",
+      "email": "test@example.com",
+      "firstName": "Sebastian",
+      "lastName": "Umar"
+    },
+    "state": "X_POINTS",
+    "flagGrade": 1.0,
+    "stepsPenalty": 0.0,
+    "flagPoints": 0,
+    "writeupPoints": 0,
+    "points": 100,
+    "lastEdited": "2021-09-20T10:23:57Z",
+    "challenge": {
+      "id": 19928,
+      "title": "Rationally Rationed Ratio",
+      "categories": [
+        {
+          "name": "web_security"
+        }
+      ],
+      "level": {
+        "id": 3,
+        "name": "medium"
+      },
+      "maxPoints": 200,
+      "maxFlagPoints": 200,
+      "maxWriteupPoints": 0,
+      "grading": "FLAG",
+      "flagWeight": 1.0,
+      "writeupWeight": 0.0
+    },
+    "eventId": 2
+  },
+  {
+    "id": 72179,
+    "user": {
+      "id": 155,
+      "username": "haus",
+      "email": "test@example.com",
+      "firstName": "H",
+      "lastName": "Aus"
+    },
+    "state": "FULL_POINTS",
+    "flagGrade": 1.0,
+    "stepsPenalty": 0.0,
+    "flagPoints": 200,
+    "writeupPoints": 0,
+    "points": 200,
+    "lastEdited": "2021-09-20T10:23:57Z",
+    "challenge": {
+      "id": 19928,
+      "title": "Rationally Rationed Ratio",
+      "categories": [
+        {
+          "name": "web_security"
+        }
+      ],
+      "level": {
+        "id": 3,
+        "name": "medium"
+      },
+      "maxPoints": 200,
+      "maxFlagPoints": 200,
+      "maxWriteupPoints": 0,
+      "grading": "FLAG",
+      "flagWeight": 1.0,
+      "writeupWeight": 0.0
+    },
+    "eventId": 2
+  }
+]
