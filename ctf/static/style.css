@@ -1,0 +1,61 @@
+body,
+h2 {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  font-family: "Space Mono", monospace;
+  font-variant-ligatures: none;
+}
+
+.app {
+  background-color: black;
+}
+
+.logo {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 1em;
+}
+
+.logo h1 {
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: block;
+  width: 420px;
+  height: 77px;
+}
+
+h2 {
+  padding: 0.5em 1em;
+  margin: 1em 0;
+}
+
+ol {
+  margin: 0 1em;
+}
+
+li {
+  color: white;
+  font-size: 14pt;
+  white-space: nowrap;
+}
+
+.singleplayer h2 {
+  background-color: rgb(215, 40, 100);
+}
+
+.singleplayer li:nth-child(-n + 5) {
+  color: rgb(215, 40, 100);
+  font-weight: 700;
+}
+
+.multiplayer h2 {
+  background-color: rgb(103, 197, 180);
+}
+
+.multiplayer li:nth-child(-n + 3) {
+  color: rgb(103, 197, 180);
+  font-weight: 700;
+}

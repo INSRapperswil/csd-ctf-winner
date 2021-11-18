@@ -1,0 +1,18 @@
+{% extends 'base.html' %} {% block content %}
+<div class="singleplayer">
+  <h2>Single Player</h2>
+  <ol>
+    {% for player in singleplayers %}
+    <li>{{ player.name }}</li>
+    {% endfor %}
+  </ol>
+</div>
+<div class="multiplayer">
+  <h2>Multiplayer</h2>
+  <ol>
+    {% for player in multiplayers %}
+    <li>{{ player.name }}</li>
+    {% endfor %}
+  </ol>
+</div>
+{% endblock %}

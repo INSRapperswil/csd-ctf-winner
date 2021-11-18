@@ -3,6 +3,7 @@ import logging as log
 from pathlib import Path
 from rich.logging import RichHandler
 from ctf.printer import html_ranking, print_round, print_ranking
+from ctf.server import run_ranking_app
 from ctf.service.AuthorizedSession import AuthorizedSession
 from ctf.service.users import get_teams, get_users
 from ctf.service.challenges import get_challenges
@@ -46,9 +47,9 @@ def cli(
 ):
     """Get the winners for the Cyber Security Days CTF."""
     context.ensure_object(dict)
-    context.auto_envvar_prefix = "CTF"
     context.obj["USERNAME"] = username
     context.obj["PASSWORD"] = password
+    context.obj["VERBOSE"] = verbose
     log.basicConfig(
         format="%(message)s",
         datefmt="[%X]",
@@ -129,11 +130,24 @@ def round(context: dict, tenant: str, event: int, teams: bool):
     is_flag=True,
     help="Print an HTML table instead of a nice terminal output.",
 )
+@click.option(
+    "--server",
+    required=False,
+    is_flag=True,
+    help="Run a Flask server to show the ranking in a browser. The page will refresh itself from time to time.",
+)
 @click.pass_context
-def ranking(context: dict, tenant: str, events: int, teams: bool, html: bool):
+def ranking(
+    context: dict, tenant: str, events: int, teams: bool, html: bool, server: bool
+):
     """Get ranking and specify format optionally."""
     username = context.obj["USERNAME"]
     password = context.obj["PASSWORD"]
+    if server:
+        verbose = context.obj["VERBOSE"]
+        run_ranking_app(tenant, username, password, list(events), verbose)
+        return
+
     with AuthorizedSession(tenant, username, password) as session:
         participants = (
             get_teams(session, *list(events))
