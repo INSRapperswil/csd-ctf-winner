@@ -41,12 +41,13 @@ def print_ranking(participants: List[Participant], teams: bool):
     table.add_column("Points", justify="right")
     price_available = 3 if teams else 5
     for idx, participant in enumerate(participants):
-        table.add_row(
-            f"{idx + 1}." if idx > 2 else f"{next(_rank_symbols)}.",
-            participant.name,
-            str(participant.total_points),
-            style="spring_green1" if idx < price_available else None,
-        )
+        if participant.total_points > 0:
+            table.add_row(
+                f"{idx + 1}." if idx > 2 else f"{next(_rank_symbols)}.",
+                participant.name,
+                str(participant.total_points),
+                style="spring_green1" if idx < price_available else None,
+            )
     print(table)
 
 
