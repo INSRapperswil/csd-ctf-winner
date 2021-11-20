@@ -79,17 +79,18 @@ def _http_get_teams(
     else:
         log.info("download teams from server")
         teams = []
-        for event_id in event_ids:
-            teams_response = session.get(f"api/events/{event_id}/teams/")
-            teams_response.raise_for_status()
-            for teams_for_event in teams_response.json():
-                team_id = teams_for_event["team"]["id"]
-                if team_id in list(map(lambda t: t["id"], teams)):
-                    continue
-                members_response = session.get(f"api/teams/{team_id}/members/")
-                members_response.raise_for_status()
-                teams_for_event["team"].setdefault("members", members_response.json())
-                teams.append(teams_for_event["team"])
+        # for event_id in event_ids:
+        event_id = 404
+        teams_response = session.get(f"api/events/{event_id}/teams/")
+        teams_response.raise_for_status()
+        for teams_for_event in teams_response.json():
+            team_id = teams_for_event["team"]["id"]
+            if team_id in list(map(lambda t: t["id"], teams)):
+                continue
+            members_response = session.get(f"api/teams/{team_id}/members/")
+            members_response.raise_for_status()
+            teams_for_event["team"].setdefault("members", members_response.json())
+            teams.append(teams_for_event["team"])
         teams_json = json.dumps(teams)
         teams_file.write_text(teams_json)
     teams = list(map(_map_json_to_team, json.loads(teams_json)))

@@ -41,6 +41,9 @@ class User(Participant):
         super().__init__(id, name)
         self.team: Team = None
 
+    def __repr__(self):
+        return f"User(id={self.id!r}, name={self.name!r}, team={self.team!r})"
+
 
 class Challenge(Base):
     def __init__(self, id: int, name: str) -> None:
