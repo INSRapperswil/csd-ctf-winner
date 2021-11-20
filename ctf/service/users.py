@@ -112,6 +112,8 @@ def _add_points_to_participants(
     solutions_response.raise_for_status()
     challenge_teams = {}
     for solution in solutions_response.json():
+        if solution["points"] == 0:
+            continue
         user = next(u for u in users if u.id == solution["user"]["id"])
         if user.team:
             challenge_id = solution["challenge"]["id"]
